@@ -5,24 +5,41 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/app --ignore /client --ignore /public"
+    "start": "node server",
+    "start-dev": "webpack -w & nodemon server"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.0",
+    "connect-session-sequelize": "^4.1.0",
+    "crypto": "^1.0.1",
     "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "lodash": "^4.17.4",
     "morgan": "^1.8.2",
+    "passport": "^0.4.0",
+    "pg": "^7.3.0",
+    "pg-hstore": "^2.3.2",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-router-dom": "^4.2.2"
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "sequelize": "^4.8.3"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "node-sass": "^4.5.3",
     "nodemon": "^1.12.0",
+    "redux-logger": "^3.0.6",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
     "webpack": "^3.5.6"
   }
 }
