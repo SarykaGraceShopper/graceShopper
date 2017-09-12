@@ -26,7 +26,8 @@ const User = db.define('user', {
   },
   isAdmin: {
     type: Sequelize.BOOLEAN
-  }
+  },
+  googleId: Sequelize.STRING
 }, {
     hooks: {
       beforeCreate: setSaltAndPassword,
