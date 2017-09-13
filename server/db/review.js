@@ -1,5 +1,3 @@
-const crypto = require('crypto');
-const _ = require('lodash');
 const db = require('./_db');
 const Sequelize = require('sequelize');
 
