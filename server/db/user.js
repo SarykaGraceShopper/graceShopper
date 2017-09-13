@@ -15,17 +15,20 @@ const User = db.define('user', {
     isEmail: true,
     allowNull: false
   },
+  image: {
+    type: Sequelize.STRING
+  },
+  shippingAddress: {
+    type: Sequelize.STRING,    
+  },
+  isAdmin: {
+    type: Sequelize.BOOLEAN
+  },
   password: {
     type: Sequelize.STRING
   },
   salt: {
     type: Sequelize.STRING
-  },
-  image: {
-    type: Sequelize.STRING
-  },
-  isAdmin: {
-    type: Sequelize.BOOLEAN
   },
   googleId: Sequelize.STRING
 }, {

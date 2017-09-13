@@ -6,9 +6,6 @@ const Power = require('./power');
 Dragon.belongsToMany(User, {
   through: 'dragon_user'
 });
-User.belongsToMany(Dragon, {
-  through: 'dragon_user'
-});
 Dragon.belongsToMany(Power, {
   through: 'dragon_power'
 });
@@ -16,5 +13,11 @@ Power.belongsToMany(Dragon, {
   through: 'dragon_power'
 });
 
+////////User////////
+User.belongsToMany(Dragon, {
+  through: 'dragon_user'
+});
+////////Reviews////////
+Review.hasOne(Dragon);
 
 module.exports = db;
