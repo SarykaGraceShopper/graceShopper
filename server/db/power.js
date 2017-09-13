@@ -1,5 +1,6 @@
 const db = require('./_db');
 const Sequelize = require('sequelize');
+const Dragon = require('./dragon')
 
 const Power = db.define('power', {
   name: {
