@@ -39,7 +39,7 @@ router.put('/:powerId', (req, res, next) => {
   .then(power => res.json(power))
 })
 
-router.delete('/:powerId/delete', (req, res, next) => {
+router.delete('/delete/:powerId', (req, res, next) => {
   Power.findOne({
     where: {
       id: req.params.powerId
