@@ -1,4 +1,3 @@
-// apiRoutes/puppies.js
 const router = require('express').Router();
 
 // matches GET requests to /api/puppies/
