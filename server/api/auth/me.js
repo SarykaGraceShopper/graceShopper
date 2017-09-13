@@ -5,6 +5,7 @@ router.get('/', (req, res, next) => {
   res.json(req.user.sanitize());
 });
 
+//KM: Make restful by taking verbs out of the url, changing methods appropriately
 router.post('/login', (req, res, next) => {
   User.findOne({
     where: {
