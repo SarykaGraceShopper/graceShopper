@@ -10,6 +10,10 @@ const Power = db.define('power', {
     type: Sequelize.INTEGER,
     validate: {min: -10, max: 10}
   }
+}, {
+    defaultScope: {
+      include: [Dragon]
+    }
 })
 
 module.exports = Power;
