@@ -2,6 +2,7 @@ const db = require('./_db');
 const User = require('./user');
 const Dragon = require('./dragon');
 const Power = require('./power');
+const Review = require('./review');
 
 Dragon.belongsToMany(User, {
   through: 'dragon_user'
