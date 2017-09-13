@@ -26,6 +26,16 @@ const Dragon = db.define('dragon', {
     type: Sequelize.STRING
   }
 }, {
+  getterMethods: {
+    price: function() {
+      return this.getDataValue('price') / 100
+    },
+  },
+  setterMethods: {
+    price: function(value) {
+      this.setDataValue('price', value * 100);
+    }
+  },
   defaultScope: {
     include: [ Power ]
   }
