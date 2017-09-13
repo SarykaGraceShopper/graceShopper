@@ -27,12 +27,14 @@ router.post('/', (req, res, next) => {
 
 router.put('/:powerId', (req, res, next) => {
   Power.update(req.body, {
-    where: req.params.studentId
+    where: {
+      id: req.params.powerId
+    }
   })
   .then(result => {
     return Power.findOne({
       where: {
-        id: req.params.studentId
+        id: req.params.powerId
       }
     })
   })
@@ -46,9 +48,9 @@ router.delete('/delete/:powerId', (req, res, next) => {
     }
   })
   .then(result => {
-    return User.destroy({
+    return Power.destroy({
       where: {
-        id: req.params.studentId
+        id: req.params.powerId
       }
     })
     .then(u => res.send(result))
