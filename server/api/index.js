@@ -1,8 +1,9 @@
-// apiRoutes/index.js
 const router = require('express').Router();
 
 router.use('/users', require('./users'));
-router.use('/auth', require('./auth')) // matches all requests to /api/users/
+router.use('/powers', require('./powers'));
+router.use('/auth', require('./auth'));
+
 
 router.use(function (req, res, next) {
   const err = new Error('Not found.');
