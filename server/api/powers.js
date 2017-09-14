@@ -5,14 +5,18 @@ const Dragon = db.model('dragon');
 
 
 router.get('/', (req, res, next) => {
-  Power.findAll({})
+  Power.findAll({
+    include: [{
+      model: Dragon
+    }]
+  })
     .then(powers => res.json(powers))
     .catch(next)
 });
 
 router.get('/:powerId', (req, res, next) => {
   Power.findOne({
-    where: {id: req.params.studentId},
+    where: { id: req.params.studentId },
     include: [Dragon]
   })
     .then(power => res.json(power))
@@ -31,14 +35,14 @@ router.put('/:powerId', (req, res, next) => {
       id: req.params.powerId
     }
   })
-  .then(result => {
-    return Power.findOne({
-      where: {
-        id: req.params.powerId
-      }
+    .then(result => {
+      return Power.findOne({
+        where: {
+          id: req.params.powerId
+        }
+      })
     })
-  })
-  .then(power => res.json(power))
+    .then(power => res.json(power))
 })
 
 router.delete('/delete/:powerId', (req, res, next) => {
@@ -47,15 +51,15 @@ router.delete('/delete/:powerId', (req, res, next) => {
       id: req.params.powerId
     }
   })
-  .then(result => {
-    return Power.destroy({
-      where: {
-        id: req.params.powerId
-      }
+    .then(result => {
+      return Power.destroy({
+        where: {
+          id: req.params.powerId
+        }
+      })
+        .then(u => res.send(result))
     })
-    .then(u => res.send(result))
-  })
-  .catch(next);
+    .catch(next);
 });
 
 

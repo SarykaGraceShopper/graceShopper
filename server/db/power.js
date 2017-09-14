@@ -15,6 +15,7 @@ const Power = db.define('power', {
     defaultScope: {
       include: [Dragon]
     }
-})
+}
+)
 
 module.exports = Power;
