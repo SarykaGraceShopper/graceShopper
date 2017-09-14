@@ -15,6 +15,5 @@ function allDragons(props) {
         </Link>
       ))}
     </div>
-  )
 
 }
