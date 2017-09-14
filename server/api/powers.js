@@ -1,12 +1,14 @@
 const router = require('express').Router();
 const db = require('../db').db;
-const Power = db.model('power');
+const Power = require('../db').Power;
 const Dragon = db.model('dragon');
 
 
 router.get('/', (req, res, next) => {
+  console.log(typeof Power)
   Power.findAll({})
-    .then(powers => res.json(powers))
+    .then(
+          powers => console.log('in power find all!!'))
     .catch(next)
 });
 
