@@ -2,22 +2,29 @@ const db = require('./_db');
 const User = require('./user');
 const Dragon = require('./dragon');
 const Power = require('./power');
+const Order = require('./order');
 const Review = require('./review');
 
-Dragon.belongsToMany(User, {
-  through: 'dragon_user'
-});
+////////Dragon////////
 Dragon.belongsToMany(Power, {
   through: 'dragon_power'
 });
+
+////////Power////////
 Power.belongsToMany(Dragon, {
   through: 'dragon_power'
 });
 
-////////User////////
-User.belongsToMany(Dragon, {
-  through: 'dragon_user'
+////////Order////////
+Order.belongsTo(User, {as: 'pastOrder'});
+Order.belongsTo(User, {as: 'cart'});
+Order.belongsToMany(Dragon, {
+  through: 'order_dragon'
 });
+Dragon.belongsToMany(Order, {
+  through: 'order_dragon'
+});
+
 ////////Reviews////////
 Review.hasOne(Dragon);
 
