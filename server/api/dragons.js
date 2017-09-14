@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
 router.get('/:dragonId', (req, res, next) => {
   Dragon.findOne({
     where: { id: req.params.dragonId },
-    include: [Power]
+    include: [{model: Power}]
   })
     .then(dragon => res.json(dragon))
     .catch(next);
