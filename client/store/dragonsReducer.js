@@ -3,9 +3,17 @@ import history from '../components/history'
 
 //action types
 const INITIALIZE = 'INITIALIZE_DRAGONS'
+const CREATE = 'CREATE_DRAGON'
+const UPDATE = 'UPDATE_DRAGON'
+const DELETE = 'DELETE_DRAGON'
 
 //action
 const init = dragons => ({type: INITIALIZE, dragons})
+const createADragon = dragon => ({type: CREATE, dragon})
+const updateADragon = dragon => ({type: UPDATE, dragon})
+const deleteADragon = dragon => ({type: DELETE, dragon})
+
+
 
 //reducers
 export default function reducer (dragons = [], action) {
@@ -13,6 +21,16 @@ export default function reducer (dragons = [], action) {
 
     case INITIALIZE:
       return action.dragons;
+
+    case CREATE:
+      return [...dragons, action.dragons];
+
+    case UPDATE:
+      const filtered = dragons.filter(dragon => dragon.id !== action.dragon.id)
+      return [...filtered, action.dragon]
+
+    case DELETE:
+      return dragons.filter(dragon => dragon.id !== action.dragon.id)
 
     default:
       return dragons
@@ -28,4 +46,32 @@ export const fetchDragons = () => dispatch => {
       dispatch(init(res.data))
     })
     .catch(err => console.error('Fetching dragons unsuccessful', err));
+}
+
+export const createDragon = (info) => dispatch => {
+  axios.post('/api/dragon/', info)
+    .then(res => res.data)
+    .then(newDragon => {
+      const action = createADragon(newDragon)
+      dispatch(action);
+    })
+}
+
+export const updateDragon = (info, dragonId) => dispatch => {
+  axios.put(`/api/dragons/${dragonId}`, info)
+    .then(res => res.data)
+    .then(updatedInfo => {
+      const updateAction = updateADragon(updatedInfo)
+      dispatch(updateAction)
+
+    })
+}
+
+export const deleteDragon = (dragonId) => dispatch => {
+  axios.delete(`api/dragon/${dragonId}/delete`)
+  .then(res => (res.data))
+  .then(dragon => {
+    const deleteAction = deleteADragon(dragon)
+    dispatch(deleteAction)
+  })
 }
