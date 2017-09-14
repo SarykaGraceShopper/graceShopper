@@ -3,6 +3,7 @@ const _ = require('lodash');
 const db = require('./_db');
 const Sequelize = require('sequelize');
 const Dragon = require('./dragon');
+const Order = require('./order');
 
 const User = db.define('user', {
   name: {
@@ -69,7 +70,22 @@ function setSaltAndPassword (user) {
     user.salt = User.generateSalt()
     user.password = User.encryptPassword(user.password, user.salt)
   }
+}
 
+User.prototype.getPastOrders = function() {
+  return Order.findAll({
+    where: {
+      pastOrderId: this.id
+    }
+  })
+}
+
+User.prototype.getCart = function() {
+  return Order.findOne({
+    where: {
+      cartId: this.id
+    }
+  })
 }
 
 module.exports = User;

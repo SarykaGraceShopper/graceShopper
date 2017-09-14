@@ -1,5 +1,5 @@
 // say our sequelize instance is create in 'db.js'
-const db = require('./db');
+const db = require('./db').db;
 // and our server that we already created and used as the previous entry point is 'server.js'
 
 if (process.env.NODE_ENV === 'development') {
