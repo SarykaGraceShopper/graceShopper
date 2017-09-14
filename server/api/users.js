@@ -1,6 +1,7 @@
 const db = require('../db').db
 const router = require('express').Router();
 const User = db.model('user');
+const Dragon = db.model('dragon');
 
 router.get('/', (req, res, next) => {
   User.findAll({})
@@ -10,8 +11,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:userId', (req, res, next) => {
   User.findOne({
-    where: {id: req.params.userId},
-    include: [Dragon]
+    where: {id: req.params.userId}
   })
     .then(user => res.json(user))
     .catch(next);
