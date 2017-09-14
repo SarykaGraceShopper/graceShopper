@@ -4,7 +4,7 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const session = require('express-session');
-const db = require('../db');
+const db = require('../db').db;
 const passport = require('passport');
 const User = require('../db/user');
 

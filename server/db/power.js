@@ -1,5 +1,6 @@
 const db = require('./_db');
 const Sequelize = require('sequelize');
+const Dragon = require('./dragon');
 
 const Power = db.define('power', {
   name: {
@@ -10,6 +11,10 @@ const Power = db.define('power', {
     type: Sequelize.INTEGER,
     validate: {min: -10, max: 10}
   }
+}, {
+    defaultScope: {
+      include: [Dragon]
+    }
 })
 
 module.exports = Power;
