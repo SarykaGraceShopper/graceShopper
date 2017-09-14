@@ -5,7 +5,7 @@ const Dragon = db.model('dragon');
 
 
 router.get('/', (req, res, next) => {
-  Power.findAll({})
+  Power.findAll()
     .then(powers => res.json(powers))
     .catch(next)
 });

@@ -17,3 +17,5 @@ db.sync()  // sync our database
         }) // then start listening with our express server once we have synced
 
     })
+
+module.exports = app;
