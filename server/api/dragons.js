@@ -45,7 +45,7 @@ router.put('/:dragonId', (req, res, next) => {
     .then(dragon => res.json(dragon))
 })
 
-router.delete('/delete/:dragonId', (req, res, next) => {
+router.delete('/:dragonId', (req, res, next) => {
   Dragon.findOne({
     where: {
       id: req.params.dragonId

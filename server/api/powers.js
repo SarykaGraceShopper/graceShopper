@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:powerId', (req, res, next) => {
   Power.findOne({
-    where: { id: req.params.studentId },
+    where: { id: req.params.powerId },
     include: [Dragon]
   })
     .then(power => res.json(power))
@@ -45,7 +45,7 @@ router.put('/:powerId', (req, res, next) => {
     .then(power => res.json(power))
 })
 
-router.delete('/delete/:powerId', (req, res, next) => {
+router.delete('/:powerId', (req, res, next) => {
   Power.findOne({
     where: {
       id: req.params.powerId
