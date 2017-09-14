@@ -1,12 +1,60 @@
+const db = require('../db')
 const router = require('express').Router();
+const User = db.model('user');
 
-// matches GET requests to /api/puppies/
-router.get('/', function (req, res, next) { /* etc */});
-// matches POST requests to /api/puppies/
-router.post('/', function (req, res, next) { /* etc */});
-// matches PUT requests to /api/puppies/:puppyId
-router.put('/:userId', function (req, res, next) { /* etc */});
-// matches DELTE requests to /api/puppies/:puppyId
-router.delete('/:userId', function (req, res, next) { /* etc */});
+router.get('/', (req, res, next) => {
+  User.findAll({})
+    .then(users => res.json(users))
+    .catch(next)
+});
 
-module.exports = router;
+router.get('/:userId', (req, res, next) => {
+  User.findOne({
+    where: {id: req.params.userId},
+    include: [Dragon]
+  })
+    .then(user => res.json(user))
+    .catch(next);
+});
+
+router.post('/', (req, res, next) => {
+  User.create(req.body)
+    .then(user => res.status(201).json(user))
+    .catch(next)
+})
+
+router.put('/:userId', (req, res, next) => {
+  User.update(req.body, {
+    where: {
+      id: req.params.userId
+    }
+  })
+  .then(result => {
+    return User.findOne({
+      where: {
+        id: req.params.userId
+      }
+    })
+  })
+  .then(user => res.json(user))
+})
+
+router.delete('/delete/:userId', (req, res, next) => {
+  User.findOne({
+    where: {
+      id: req.params.userId
+    }
+  })
+  .then(result => {
+    return User.destroy({
+      where: {
+        id: req.params.userId
+      }
+    })
+    .then(u => res.send(result))
+  })
+  .catch(next);
+});
+
+
+module.exports = router
