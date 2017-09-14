@@ -10,7 +10,7 @@ router.get('/', (req, res, next) => {
       model: Power
     }]
   })
-    .then(dragons => console.log(dragons))
+    .then(dragons => res.json(dragons))
     .catch(next)
 });
 

@@ -2,6 +2,8 @@ const db = require('./_db');
 const Sequelize = require('sequelize');
 const Power = require('./power');
 
+console.log("POWERRRRRRRRR", Power);
+
 const Dragon = db.define('dragon', {
   name: {
     type: Sequelize.STRING,
