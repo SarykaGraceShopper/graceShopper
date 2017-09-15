@@ -20,12 +20,12 @@ class Root extends Component {
   render() {
     return (
       <div>
-        <Route exact path="/" component={Navbar} />
-        <Route exact path="/:active" component={Navbar} />
+        <Route path="/" component={Navbar} />
+        <Route path="/:active" component={Navbar} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/dragons" component={AllDragons} />
-            <Route exact path="/dragon/:dragonId" component={SingleDragon} />
+            <Route path="/dragons/:dragonId" component={SingleDragon} />
             <Redirect to="/" />
           </Switch>
       </div>
