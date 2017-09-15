@@ -21,9 +21,5 @@ function AllDragons(props) {
   )
 }
 
-const mapStateToProps = (state) => {
-  console.log(state)
-  return{dragons: state}
-}
-
+const mapStateToProps = (state) => ({dragons: state.dragons})
 export default connect(mapStateToProps)(AllDragons);
