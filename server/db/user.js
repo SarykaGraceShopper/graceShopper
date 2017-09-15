@@ -36,10 +36,6 @@ const User = db.define('user', {
     hooks: {
       beforeCreate: setSaltAndPassword,
       beforeUpdate: setSaltAndPassword
-    },
-
-    defaultScope: {
-      include: [Dragon]
     }
   })
 // instance methods
