@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import history from '../history'
+import store from '../store'
 
 function SingleDragon(props) {
 
@@ -31,9 +32,7 @@ function SingleDragon(props) {
 }
 
 const mapStateToProps = function (state) {
-  return {
-    dragons: state.dragons
-  };
+  return store.getState();
 };
 
 export default connect(mapStateToProps)(SingleDragon);
