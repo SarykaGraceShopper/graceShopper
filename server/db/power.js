@@ -12,4 +12,5 @@ const Power = db.define('power', {
   }
 })
 
+
 module.exports = Power;
