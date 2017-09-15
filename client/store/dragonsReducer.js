@@ -1,5 +1,5 @@
 import axios from 'axios'
-import history from '../components/history'
+import history from '../history'
 
 //action types
 const INITIALIZE = 'INITIALIZE_DRAGONS'
@@ -41,8 +41,9 @@ export default function reducer (dragons = [], action) {
 //thunk creators
 
 export const fetchDragons = () => dispatch => {
-  axios.get('/api/dragons')
+  return axios.get('/api/dragons')
     .then(res => {
+      console.log('HIIII',res.data);
       dispatch(init(res.data))
     })
     .catch(err => console.error('Fetching dragons unsuccessful', err));

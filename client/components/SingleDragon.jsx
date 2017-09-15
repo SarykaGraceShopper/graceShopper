@@ -10,11 +10,22 @@ function SingleDragon(props) {
   //   history.goBack();
   // }
 
-  console.log(props.match.params.dragonId)
+  console.log(props)
 
   return (
     <div>
-        HI
+      {
+        props.dragons.length
+          && props.dragons.filter(dragon => {
+            return (dragon.id == props.match.params.dragonId)
+          }).map(dragon => {
+            return (
+              <div key={dragon.id}>{dragon.name}<br />
+                <img className="dragon" src={dragon.image} />
+              </div>
+            )
+          })
+      }
     </div>
   );
 }
@@ -26,17 +37,3 @@ const mapStateToProps = function (state) {
 };
 
 export default connect(mapStateToProps)(SingleDragon);
-
-
-// {
-//   props.dragons.length
-//     && props.dragons.filter(dragon => {
-//       return (dragon.id == props.match.params.dragonId)
-//     }).map(dragon => {
-//       return (
-//         <div key={dragon.id}>{dragon.name}<br />
-//           <img className="dragon" src={dragon.image} />
-//         </div>
-//       )
-//     })
-// }
