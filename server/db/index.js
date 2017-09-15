@@ -27,5 +27,6 @@ Dragon.belongsToMany(Order, {
 
 ////////Reviews////////
 Review.hasOne(Dragon);
+Review.belongsTo(User);
 
 module.exports = {db, User, Dragon, Power, Review, Order}
