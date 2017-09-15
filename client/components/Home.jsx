@@ -12,7 +12,7 @@ function Home(props) {
 
   return (
     <div>
-        hey there
+    Hey There!! Wanna buy some dragons??? You are in the right place!!!
     </div>
   );
 }

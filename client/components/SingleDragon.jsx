@@ -9,10 +9,8 @@ function SingleDragon(props) {
   //   event.preventDefault();
   //   history.goBack();
   // }
-      {console.log('HIII')}
   return (
     <div>
-
       {
         props.dragons.length
           && props.dragons.filter(dragon => {
