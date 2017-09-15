@@ -5,14 +5,19 @@ const Dragon = db.model('dragon');
 
 
 router.get('/', (req, res, next) => {
-  Order.findAll({})
+  Order.findAll({
+    include: [{
+      model: Dragon
+    }]
+  })
     .then(orders => res.json(orders))
     .catch(next)
 });
 
 router.get('/:orderId', (req, res, next) => {
   Order.findOne({
-    where: {id: req.params.orderId}
+    where: { id: req.params.orderId },
+    include: [{ model: Dragon }]
   })
     .then(order => res.json(order))
     .catch(next);
@@ -30,14 +35,14 @@ router.put('/:orderId', (req, res, next) => {
       id: req.params.orderId
     }
   })
-  .then(result => {
-    return Order.findOne({
-      where: {
-        id: req.params.orderId
-      }
+    .then(result => {
+      return Order.findOne({
+        where: {
+          id: req.params.orderId
+        }
+      })
     })
-  })
-  .then(order => res.json(order))
+    .then(order => res.json(order))
 })
 
 router.delete('/delete/:orderId', (req, res, next) => {
@@ -46,15 +51,15 @@ router.delete('/delete/:orderId', (req, res, next) => {
       id: req.params.orderId
     }
   })
-  .then(result => {
-    return Order.destroy({
-      where: {
-        id: req.params.orderId
-      }
+    .then(result => {
+      return Order.destroy({
+        where: {
+          id: req.params.orderId
+        }
+      })
+        .then(u => res.send(result))
     })
-    .then(u => res.send(result))
-  })
-  .catch(next);
+    .catch(next);
 });
 
 
