@@ -5,6 +5,7 @@ router.use('/users', require('./users'));
 router.use('/reviews', require('./reviews'));
 router.use('/powers', require('./powers'));
 router.use('/auth', require('./auth'));
+router.use('/orders', require('./orders'));
 router.use('/dragons', require('./dragons'));
 
 

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const db = require('../db').db;
-const Power = db.model('power');
+const Power = require('../db').Power;
 const Dragon = db.model('dragon');
 
 
