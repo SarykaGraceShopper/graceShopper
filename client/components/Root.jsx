@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import {connect} from 'react-redux'
-
+import {withRouter} from 'react-router'
 import store from '../store';
 import { fetchDragons } from '../store/dragonsReducer'
 
@@ -20,12 +20,11 @@ class Root extends Component {
   render() {
     return (
       <div>
-        <Route path="/" component={Navbar} />
-        <Route path="/:active" component={Navbar} />
+         <Navbar/>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/dragons" component={AllDragons} />
-            <Route path="/dragons/:dragonId" component={SingleDragon} />
+            <Route exact path="/dragons/:dragonId" component={SingleDragon} />
             <Redirect to="/" />
           </Switch>
       </div>
@@ -41,4 +40,4 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Root);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Root));
