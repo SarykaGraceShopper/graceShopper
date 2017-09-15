@@ -49,7 +49,7 @@ export const fetchDragons = () => dispatch => {
 }
 
 export const createDragon = (info) => dispatch => {
-  axios.post('/api/dragon/', info)
+  axios.post('/api/dragons', info)
     .then(res => res.data)
     .then(newDragon => {
       const action = createADragon(newDragon)
@@ -68,7 +68,7 @@ export const updateDragon = (info, dragonId) => dispatch => {
 }
 
 export const deleteDragon = (dragonId) => dispatch => {
-  axios.delete(`api/dragon/${dragonId}/delete`)
+  axios.delete(`/api/dragons/${dragonId}`)
   .then(res => (res.data))
   .then(dragon => {
     const deleteAction = deleteADragon(dragon)

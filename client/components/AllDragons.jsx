@@ -11,9 +11,9 @@ function allDragons(props) {
       {props.dragons.map(dragon => (
         <Link to={`/dragons/${dragon.id}`} key={dragon.id}>
         <h3>{dragon.name}</h3>
-        <img src={dragon.image} id={dragon.id}/>
+        <img src={dragon.image} id={dragon.id} />
         </Link>
       ))}
     </div>
-
+  )
 }

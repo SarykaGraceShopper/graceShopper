@@ -8,7 +8,7 @@ import {Provider} from 'react-redux';
 import { Router } from 'react-router-dom';
 import history from './history';
 
-import Root from './compenents/Root';
+import Root from './components/Root.jsx';
 
 ReactDOM.render(
   <Provider store={store}>
