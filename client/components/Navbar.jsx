@@ -25,7 +25,7 @@ export default function Navbar(props) {
               (props.match.params.active === 'dragons')
                 ? 'active'
                 : ''
-            }><NavLink to="/campuses">Campuses</NavLink></li>
+            }><NavLink to="/dragons">Dragons</NavLink></li>
           </ul>
         </div>
       </div>

@@ -25,7 +25,7 @@ class Root extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/dragons" component={AllDragons} />
-            <Route exact path="/dragon/:dragonId" component={SingleDragon} />
+            <Route exact path="/dragons/:dragonId" component={SingleDragon} />
             <Redirect to="/" />
           </Switch>
       </div>
