@@ -5,16 +5,14 @@ import history from '../history'
 import store from '../store'
 
 function SingleDragon(props) {
-
   // function handleClick(event) {
   //   event.preventDefault();
   //   history.goBack();
   // }
-
-  console.log(props)
-
+      {console.log('HIII')}
   return (
     <div>
+
       {
         props.dragons.length
           && props.dragons.filter(dragon => {
@@ -31,8 +29,6 @@ function SingleDragon(props) {
   );
 }
 
-const mapStateToProps = function (state) {
-  return store.getState();
-};
+const mapStateToProps = (state) => ({dragons: state.dragons})
 
 export default connect(mapStateToProps)(SingleDragon);

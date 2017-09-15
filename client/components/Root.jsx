@@ -14,7 +14,6 @@ import SingleDragon from './SingleDragon.jsx';
 class Root extends Component {
 
   componentDidMount () {
-    console.log(this.props)
     this.props.fetchInitialData();
   }
 
