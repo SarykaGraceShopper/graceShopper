@@ -45,7 +45,7 @@ router.put('/:orderId', (req, res, next) => {
     .then(order => res.json(order))
 })
 
-router.delete('/delete/:orderId', (req, res, next) => {
+router.delete('/:orderId', (req, res, next) => {
   Order.findOne({
     where: {
       id: req.params.orderId
