@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 import store from '../store';
 import { fetchDragons } from '../store/dragonsReducer'
@@ -9,11 +9,11 @@ import Navbar from './Navbar.jsx';
 import Home from './Home.jsx';
 import AllDragons from './AllDragons.jsx';
 import SingleDragon from './SingleDragon.jsx';
-
+import SingleUser from './SingleUser.jsx';
 
 class Root extends Component {
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.fetchInitialData();
   }
 
@@ -22,12 +22,14 @@ class Root extends Component {
       <div>
         <Route exact path="/" component={Navbar} />
         <Route exact path="/:active" component={Navbar} />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/dragons" component={AllDragons} />
-            <Route exact path="/dragon/:dragonId" component={SingleDragon} />
-            <Redirect to="/" />
-          </Switch>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/dragons" component={AllDragons} />
+          <Route exact path="/dragon/:dragonId" component={SingleDragon} />
+          <Route exact path="/user/:userId" component={SingleUser} />
+          <Route exact path="/cart/:userId" component={SingleUser} />
+          <Redirect to="/" />
+        </Switch>
       </div>
     );
   }
@@ -38,6 +40,8 @@ const mapStateToProps = null;
 const mapDispatchToProps = dispatch => ({
   fetchInitialData: () => {
     dispatch(fetchDragons());
+    dispatch(fetchUsers());
+    dispatch(fetchOrders());
   }
 });
 
