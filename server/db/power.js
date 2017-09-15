@@ -10,7 +10,7 @@ const Power = db.define('power', {
     type: Sequelize.INTEGER,
     validate: {min: -10, max: 10}
   }
-}
-)
+})
+
 
 module.exports = Power;
