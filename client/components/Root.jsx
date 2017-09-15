@@ -20,8 +20,6 @@ class Root extends Component {
   render() {
     return (
       <div>
-        {/*<Route path="/" component={Navbar} />
-        <Route path="/:active" component={Navbar} />*/}
          <Navbar/>
           <Switch>
             <Route exact path="/" component={Home} />

@@ -1,0 +1,42 @@
+body {
+  padding-top: 65px; /* body padding for fixed top nav */
+}
+
+img.campus {
+  border-radius: 4%;
+  width: 70%;
+  margin: 0 15% 0% 15%;
+}
+
+.campus-items div {
+  padding: 5%
+}
+.campus-items h2,
+.campus-items h4 {
+   text-align: center;
+}
+
+.go-right {
+  text-align: right;
+}
+
+.go-center {
+  text-align: center;
+}
+
+.more-padding {
+  margin:2em;
+}
+
+.single-student-table {
+  margin: 0 auto;
+}
+
+.single-student-table td {
+  text-align: left;
+  padding: .5em;
+}
+
+.single-student-table td.left {
+  text-align: right;
+}
