@@ -1,6 +1,8 @@
 import axios from 'axios'
 import history from '../history'
 
+//this reducer keeps track of all orders in the store
+
 //action types
 const INITIALIZE = 'INITIALIZE_ORDER'
 const CREATE = 'CREATE_USER'

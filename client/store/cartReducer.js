@@ -11,7 +11,7 @@ const DELETE = 'DELETE_CART_ORDER'
 
 //action
 const init = orders => ({type: INITIALIZE, orders})
-const createAOrder = order => ({type: CREATE, order})
+const addAnOrder = order => ({type: CREATE, order})
 const updateAOrder = order => ({type: UPDATE, order})
 const deleteAOrder = order => ({type: DELETE, order})
 
@@ -40,24 +40,24 @@ export default function reducer (orders = [], action) {
 
 //thunk creators
 
-export const fetchCartOrders = () => dispatch => {
-  return axios.get('/api/orders')
+export const fetchCartOrders = (userId) => dispatch => {
+  return axios.get(`/api/users/${userId}/cart`)
     .then(res => {
       dispatch(init(res.data))
     })
-    .catch(err => console.error('Fetching orders unsuccessful', err));
+    .catch(err => console.error('Fetching cart orders unsuccessful', err));
 }
 
-export const createOrder = (info) => dispatch => {
+export const createCartOrder = (info) => dispatch => {
   axios.post('/api/orders', info)
     .then(res => res.data)
     .then(newOrder => {
-      const action = createAOrder(newOrder)
+      const action = addAnOrder(newOrder)
       dispatch(action);
     })
 }
 
-export const updateOrder = (info, orderId) => dispatch => {
+export const updateCartOrder = (info, orderId) => dispatch => {
   axios.put(`/api/orders/${orderId}`, info)
     .then(res => res.data)
     .then(updatedInfo => {
@@ -67,7 +67,7 @@ export const updateOrder = (info, orderId) => dispatch => {
     })
 }
 
-export const deleteOrder = (orderId) => dispatch => {
+export const deleteCartOrder = (orderId) => dispatch => {
   axios.delete(`/api/orders/${orderId}`)
   .then(res => (res.data))
   .then(order => {
