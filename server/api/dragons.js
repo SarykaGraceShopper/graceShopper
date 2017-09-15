@@ -6,7 +6,7 @@ const Dragon = db.model('dragon');
 
 router.get('/', (req, res, next) => {
   Dragon.findAll({})
-    .then(dragons => console.log(dragons))
+    .then(dragons => res.json(dragons))
     .catch(next)
 });
 

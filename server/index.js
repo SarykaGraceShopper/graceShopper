@@ -5,7 +5,6 @@ const db = require('./db').db;
 if (process.env.NODE_ENV === 'development') {
   require('../localSecrets'); // this will mutate the process.env object with your secrets.
 }
-console.log(process.env.GOOGLE_CLIENT_ID)
 const app = require('./app');
 const port = process.env.PORT || 3000;
 
