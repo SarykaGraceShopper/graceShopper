@@ -15,12 +15,10 @@ router.post('/login', (req, res, next) => {
       if (!user) res.status(401).send('User not found');
       else if (!user.correctPassword(req.body.password)) res.status(401).send('Incorrect password');
       else {
-        console.log(req.user);
         req.login(user, err => {
           if (err) next(err);
           else res.json(user.sanitize());
         });
-        console.log(req.user);
       }
     })
     .catch(next);
@@ -38,9 +36,7 @@ router.post('/signup', (req, res, next) => {
 });
 
 router.post('/logout', (req, res, next) => {
-  console.log(req.user);
   req.logout();
-  console.log(req.user);
   res.sendStatus(200);
 });
 
