@@ -10,21 +10,21 @@ const dbStore = new SequelizeStore({ db });
 const passport = require('passport');
 const User = require('../db/user');
 
+passport.serializeUser(function (user, done) {
+  console.log("serializing");
+  console.log(user.id);
 
-passport.serializeUser((user, done) => {
-    try {
-        done(null, user.id);
-    } catch (err) {
-        done(err);
-    }
+  done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-    User.findById(id)
-        .then(user => done(null, user))
-        .catch(done);
-});
+passport.deserializeUser(function (id, done) {
+  console.log("deserializing");
+  console.log(id);
 
+  User.findById(id)
+  .then(user => done(null, user))
+  .catch(done);
+});
 
 
 app.use(morgan('dev'));
@@ -38,6 +38,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 

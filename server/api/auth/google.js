@@ -14,11 +14,13 @@ const strategy = new GoogleStrategy(googleConfig, function (token, refreshToken,
   const name = profile.displayName;
   const email = profile.emails[0].value;
 
-  User.findOne({where: { googleId: googleId  }})
-    .then(function (user) {
-      console.log(user)
-    })
-    .catch(done);
+   User.find({where: {googleId}})
+    .then(user => user
+      ? done(null, user)
+      : User.create({name, email, googleId})
+        .then(user => done(null, user))
+    )
+    .catch(done)
 });
 
 // register our strategy with passport
