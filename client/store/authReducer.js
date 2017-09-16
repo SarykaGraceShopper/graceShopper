@@ -2,26 +2,42 @@ import axios from 'axios'
 import history from '../history'
 
 //action types
-const LOGIN = 'LOGIN_USER'
-const LOGOUT = 'LOGOUT_USER'
+const GET_USER = 'GET_USER'
+const REMOVE_USER = 'REMOVE_USER'
 
 //action creators
-const login = {type: LOGIN}
-const logout = {type: LOGOUT}
+const getUser = user => ({type: GET_USER, user})
+const removeUser = () => ({type: REMOVE_USER})
 
 //reducers
-export default function reducer (isLoggedIn=false, action) {
-  switch(action.type) {
-
-    case LOGIN:
-      return isLoggedIn=true
-
-    case LOGOUT:
-      return isLoggedIn=false
-
+export default function reducer (user={}, action) {
+  switch (action.type) {
+    case GET_USER:
+      return action.user
+    case REMOVE_USER:
+      return user={}
     default:
-      return isLoggedIn
+      return user
   }
 }
 
 //thunk creators
+
+export const auth = (email, password, method) =>
+  dispatch =>
+    axios.post(`/api/auth/me/${method}`, { email, password })
+      .then(res => {
+        dispatch(getUser(res.data))
+        history.push('/')
+      })
+      .catch(error =>
+        dispatch(getUser({error})))
+
+export const logout = () =>
+  dispatch =>
+    axios.post('api/auth/me/logout')
+      .then(res => {
+        dispatch(removeUser())
+        history.push('/login')
+      })
+      .catch(err => console.log(err))

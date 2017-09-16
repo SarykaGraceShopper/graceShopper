@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router'
+import { logout } from '../store'
 import { Link, NavLink } from 'react-router-dom';
 
 function Navbar(props) {
@@ -23,8 +24,7 @@ function Navbar(props) {
             props.isLoggedIn
             ? <div>
               {/* The navbar will show these links after you log in */}
-              <NavLink to='/home'>Home</NavLink>
-              <a href='#' onClick={handleClick}>Logout</a>
+              <a href='#' onClick={props.handleClick}>Logout</a>
             </div>
             : <div>
               {/* The navbar will show these links before you log in */}
@@ -41,7 +41,7 @@ function Navbar(props) {
 
 const mapState = (state) => {
   return {
-    isLoggedIn: state.isLoggedIn
+    isLoggedIn: !!state.user.id
   }
 }
 

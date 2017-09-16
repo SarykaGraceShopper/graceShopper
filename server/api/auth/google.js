@@ -6,7 +6,7 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
   const googleConfig = {
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: '/api/auth/google/verify'
+    callbackURL: '/verify'
   };
 
 const strategy = new GoogleStrategy(googleConfig, function (token, refreshToken, profile, done) {
@@ -16,14 +16,7 @@ const strategy = new GoogleStrategy(googleConfig, function (token, refreshToken,
 
   User.findOne({where: { googleId: googleId  }})
     .then(function (user) {
-      if (!user) {
-        return User.create({ name, email, googleId })
-          .then(function (user) {
-            done(null, user);
-          });
-      } else {
-        done(null, user);
-      }
+      console.log(user)
     })
     .catch(done);
 });

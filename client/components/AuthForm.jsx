@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { auth } from '../store'
+import { auth } from '../store';
+import {withRouter} from 'react-router';
 
 const AuthForm = (props) => {
 
@@ -22,7 +23,7 @@ const AuthForm = (props) => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href='/auth/google'>{displayName} with Google</a>
+      <a href='api/auth/google'>{displayName} with Google</a>
     </div>
   )
 }
@@ -31,7 +32,7 @@ const mapLogin = (state) => {
   return {
     name: 'login',
     displayName: 'Login',
-    error: 'hi'
+    error: state.user.error
   }
 }
 
@@ -39,7 +40,7 @@ const mapSignup = (state) => {
   return {
     name: 'signup',
     displayName: 'Sign Up',
-    error: 'hi'
+    error: state.user.error
   }
 }
 
@@ -55,5 +56,5 @@ const mapDispatch = (dispatch) => {
   }
 }
 
-export const Login = connect(mapLogin, mapDispatch)(AuthForm);
-export const Signup = connect(mapSignup, mapDispatch)(AuthForm);
+export const Login = withRouter(connect(mapLogin, mapDispatch)(AuthForm));
+export const Signup = withRouter(connect(mapSignup, mapDispatch)(AuthForm));

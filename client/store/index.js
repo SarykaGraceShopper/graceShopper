@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware } from 'redux';
 import dragons from './dragonsReducer';
-import auth from './authReducer'
+import user from './authReducer'
 import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { combineReducers } from 'redux'
 
-const reducer = combineReducers({dragons, auth})
+const reducer = combineReducers({dragons, user})
 
 const store = createStore(
   reducer,
