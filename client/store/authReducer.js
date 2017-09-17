@@ -23,6 +23,14 @@ export default function reducer (user={}, action) {
 
 //thunk creators
 
+export const fetchUser = () => dispatch => {
+  return axios.get('/api/users/currentUser')
+    .then(res => {
+      dispatch(getUser(res.data))
+    })
+    .catch(err=>console.log(err))
+}
+
 export const auth = (email, password, method) =>
   dispatch =>
     axios.post(`/api/auth/me/${method}`, { email, password })

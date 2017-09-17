@@ -10,6 +10,11 @@ router.get('/', (req, res, next) => {
     .catch(next)
 });
 
+
+router.get('/currentUser', (req, res, next) => {
+  res.send(req.user)
+})
+
 router.get('/:userId', (req, res, next) => {
   User.findOne({
     where: {id: req.params.userId}
