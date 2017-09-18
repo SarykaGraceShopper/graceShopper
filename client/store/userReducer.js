@@ -40,7 +40,7 @@ export const auth = (email, password, method) =>
     axios.post(`/api/auth/me/${method}`, { email, password })
       .then(res => {
         dispatch(getUser(res.data))
-        history.push('/')
+        history.push('/profile')
       })
       .catch(error =>
         dispatch(getUser({error})))
