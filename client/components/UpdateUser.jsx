@@ -98,7 +98,7 @@ const mapDispatch = (dispatch, ownProps) => {
         newUserInfo.shippingAddress = event.target.shippingAddress.value
       }
 
-      dispatch(updateAUser(newUserInfo, 10))
+      dispatch(updateAUser(newUserInfo, id))
     }
   }
 }
