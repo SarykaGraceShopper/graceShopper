@@ -11,21 +11,15 @@ const passport = require('passport');
 const User = require('../db/user');
 
 passport.serializeUser(function (user, done) {
-  console.log("serializing");
-  console.log(user.id);
-
   done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
-  console.log("deserializing");
-  console.log(id);
-
   User.findById(id)
+  .then(user => user.sanitize())
   .then(user => done(null, user))
   .catch(done);
 });
-
 
 app.use(morgan('dev'));
 
