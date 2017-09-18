@@ -51,6 +51,7 @@ export const updateAUser = (info, userId) => dispatch => {
     .then(updatedInfo => {
       const updateAction = updateUser(updatedInfo)
       dispatch(updateAction)
+      history.push('/profile')
     })
 }
 

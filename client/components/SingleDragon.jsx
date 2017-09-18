@@ -15,7 +15,7 @@ function SingleDragon(props) {
     event.preventDefault();
     history.goBack();
   }
-git a
+
   return (
     <div className="adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag">
       <div className="row">

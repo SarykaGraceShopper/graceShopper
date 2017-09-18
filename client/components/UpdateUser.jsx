@@ -42,7 +42,7 @@ class  UpdateUser extends Component {
 
 
   render() {
-    const {name, email, password, image, shippingAddress}=this.props.user
+    const {id, name, email, password, image, shippingAddress}=this.props.user
     return (
      <div>
       <div style={{marginTop: '100px'}}>
@@ -65,7 +65,7 @@ class  UpdateUser extends Component {
             <input name='shippingAddress' type='text' placeholder={shippingAddress} onChange={this.handleShipping} value={this.state.shippingAddress.length ? this.state.shippingAddress : this.props.shippingAddress}/>
           </div>
           <div>
-            <button type='submit'>Update</button>
+            <button type='submit' name='submit' value={id}>Update</button>
           </div>
         </form>
       </div>
@@ -82,6 +82,8 @@ const mapDispatch = (dispatch, ownProps) => {
   return {
     handleSubmit (event) {
       event.preventDefault()
+      const id = +event.target.submit.value
+      console.log(id)
       const newUserInfo = {}
       if (event.target.name.value.length) {
         newUserInfo.name = event.target.name.value
