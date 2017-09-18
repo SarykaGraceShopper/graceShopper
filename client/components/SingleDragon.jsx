@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import history from '../history'
 import store from '../store'
+import { addCartDragon } from '../store/cartReducer'
 
 function SingleDragon(props) {
-  // function handleClick(event) {
-  //   event.preventDefault();
-  //   history.goBack();
-  // }
-      {console.log('HIII')}
+
+  const { handleAddToCart } = props;
+  
   return (
     <div>
 
@@ -35,22 +34,13 @@ function SingleDragon(props) {
 const mapStateToProps = (state) => ({dragons: state.dragons})
 
 const mapDispatchToProps = function (dispatch, ownProps) {
-    const studentId = ownProps.match.params.studentId;
+    const dragonId = ownProps.match.params.dragonId;
     return {
         handleAddToCart(evt) {
-            evt.preventDefault();
-            const name = evt.target.dragonName.value;
+            // evt.preventDefault();
             //todo rest of attributes
-            const addCartOrderDispatch = createCartOrder({
-               name: name
-              },
-                ownProps.history)
+            const addCartOrderDispatch = addCartDragon(dragonId)
             dispatch(addCartOrderDispatch)
-                .then((res) => {
-                })
-                .catch(err => {
-                    dispatch(writeEmailError(true))
-                })
         }
     };
 };

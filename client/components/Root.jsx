@@ -6,6 +6,7 @@ import store from '../store';
 import { fetchDragons } from '../store/dragonsReducer'
 import { fetchUsers } from '../store/usersReducer'
 import { fetchOrders } from '../store/ordersReducer'
+import { fetchCartOrders } from '../store/cartReducer'
 
 import Navbar from './Navbar.jsx';
 import Home from './Home.jsx';
@@ -45,6 +46,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchDragons());
     dispatch(fetchUsers());
     dispatch(fetchOrders());
+    dispatch(fetchCartOrders(1));
   }
 });
 

@@ -11,9 +11,13 @@ const DELETE = 'DELETE_CART_DRAGON'
 
 //action
 const init = cart => ({type: INITIALIZE, cart})
-const addCartDragon = dragon => ({type: CREATE, dragon})
-const updateCartDragon = dragon => ({type: UPDATE, dragon})
-const deleteCartDragon = dragon => ({type: DELETE, dragon})
+const create = newCart => ({type: CREATE, newCart})
+const update = dragon => ({type: UPDATE, dragon})
+const remove = dragon => ({type: DELETE, dragon})
+
+//cart id
+//todo: cleanup, find better way to get id
+let cartID = -1
 
 //reducers
 export default function reducer (cart = {}, action) {
@@ -23,8 +27,9 @@ export default function reducer (cart = {}, action) {
       return action.cart;
 
     case CREATE:
-      return Object.assign({}, cart,
-        {dragons: [...cart.dragons, action.dragon]});
+      return action.newCart;
+    // return Object.assign({}, cart,
+      //   {dragons: [...cart.dragons, action.dragon]});
       
     //todo: fix all of these
     case UPDATE:
@@ -45,16 +50,17 @@ export default function reducer (cart = {}, action) {
 export const fetchCartOrders = (userId) => dispatch => {
   return axios.get(`/api/users/${userId}/cart`)
     .then(res => {
+      cartID = res.data.id;
       dispatch(init(res.data))
     })
     .catch(err => console.error('Fetching cart orders unsuccessful', err));
 }
 
-export const createCartOrder = (info) => dispatch => {
-  axios.post('/api/orders', info)
+export const addCartDragon = (dragonId) => dispatch => {
+  axios.put(`/api/orders/1/addDragon`, {id: dragonId})
     .then(res => res.data)
-    .then(newOrder => {
-      const action = addCartOrder(newOrder)
+    .then(newCart => {
+      const action = create(newCart)
       dispatch(action);
     })
 }
