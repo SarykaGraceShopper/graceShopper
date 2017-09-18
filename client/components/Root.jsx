@@ -10,6 +10,7 @@ import Navbar from './Navbar.jsx';
 import Home from './Home.jsx';
 import AllDragons from './AllDragons.jsx';
 import SingleDragon from './SingleDragon.jsx';
+import UpdateUser from './UpdateUser.jsx'
 
 
 class Root extends Component {
@@ -28,6 +29,7 @@ class Root extends Component {
             <Route exact path="/dragons/:dragonId" component={SingleDragon} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/profile" component={UpdateUser} />
             <Redirect to="/" />
           </Switch>
       </div>
