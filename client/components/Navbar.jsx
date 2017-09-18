@@ -18,16 +18,29 @@ function Navbar(props) {
         </div>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="nav navbar-nav navbar-right">
-            <li><NavLink to="/">HOME</NavLink></li>
-            <li><NavLink to="/dragons">DRAGONS</NavLink></li>
+            <li className={
+              (props.location.pathname === '/') &&
+                'active'
+            }><NavLink to="/">HOME</NavLink></li>
+            <li className={
+              (props.location.pathname === '/dragons') &&
+                'active'
+            }><NavLink to="/dragons">DRAGONS</NavLink></li>
             {
-              props.isLoggedIn // Logout vs Login/Signup display
-              ? <li><NavLink to="/login" onClick={props.handleClick}>logout</NavLink></li>
-              : <li><NavLink to="/login">login</NavLink></li>
-            } {
               !props.isLoggedIn
-              && <li><NavLink to="/signup">sign up</NavLink></li>
+              && <li className={
+                (props.location.pathname === '/signup') &&
+                  'active'
+              }><NavLink to="/signup">sign up</NavLink></li>
             }
+            <li className={
+              (props.location.pathname === '/login') &&
+                'active'
+            }> {
+              props.isLoggedIn
+              ? <NavLink to="/login" onClick={props.handleClick}>logout</NavLink>
+              : <NavLink to="/login">login</NavLink>
+            } </li>
           </ul>
         </div>
       </div>

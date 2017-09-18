@@ -6,7 +6,7 @@
 }
 
 body {
-  margin-top: 50px;
+  margin-top: 100px;
   background-color: #06b6ff;
   background: url('/img/sky.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -35,10 +35,39 @@ a {
     width: 348px;
 }
 
+#myNavbar li a {
+  border: 3px solid transparent;
+}
+
+#myNavbar li.active a {
+  background-color: #efd496;
+  border-color: #f5f5d4;
+}
+
+#myNavbar li a:hover {
+    border-color: #efd496;
+}
+
 .dragon-image {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   width: 75%;
   padding-bottom: 75%;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+  background-color: #efd496;
+}
+
+.navbar-default .navbar-toggle, .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #efd496;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #000;
+}
+
+.navbar-toggle .icon-bar {
+  height: 1px;
 }
