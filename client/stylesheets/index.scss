@@ -1,9 +1,36 @@
+@import '/css/bootstrap.min.css';
+
 * {
-  background-color: aliceblue;
   color: black;
   font-family: arial;
 }
 
+body {
+  margin-top: 50px;
+  background-color: #06b6ff;
+  background: url('/img/sky.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 a {
   text-decoration: none;
+}
+
+.navbar-default {
+  border-color: transparent;
+  background-image: url('/img/discountdragons.png'), url('/img/cute-dragon-animated.gif');
+  background-position: left bottom, left bottom;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 348px, 100px;
+  background-color: #f5f5d4;
+}
+
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+    margin-left: 0;
+    padding: 0;
+    display: block;
+    width: 348px;
 }

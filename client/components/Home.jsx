@@ -6,7 +6,11 @@ import history from '../history'
 function Home(props) {
 
   return (
-      <h2 style={{marginTop: '200px'}}> Welcome {props.email}! </h2>
+    <div className="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+    <p>Hey There, {props.email}!! Wanna buy some dragons??? You are in the right place!!!</p>
+      </div>
+    </div>
   );
 }
 

@@ -20,7 +20,7 @@ class Root extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container">
          <Navbar/>
           <Switch>
             <Route exact path="/" component={Home} />
