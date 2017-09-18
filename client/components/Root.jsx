@@ -1,26 +1,36 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
+
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import store from '../store';
 import { fetchDragons } from '../store/dragonsReducer';
 import { fetchUser } from '../store/userReducer';
 import {Login, Signup} from './AuthForm.jsx';
+import { fetchOrders } from '../store/ordersReducer'
+import { fetchCartOrders } from '../store/cartReducer'
+
 import Navbar from './Navbar.jsx';
 import Home from './Home.jsx';
 import AllDragons from './AllDragons.jsx';
 import SingleDragon from './SingleDragon.jsx';
 import UpdateUser from './UpdateUser.jsx'
+import SingleUser from './SingleUser.jsx';
+import Cart from './Cart.jsx'
 
 
 class Root extends Component {
 
-  componentDidMount () {
+  componentDidMount() {
     this.props.fetchInitialData();
+    if(this.props.user.id) {
+      this.props.fetchCartData(this.props.user.id)
+    }
   }
 
   render() {
     return (
+
       <div className="container">
          <Navbar/>
           <Switch>
@@ -30,6 +40,8 @@ class Root extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/profile" component={UpdateUser} />
+            <Route exact path="/user/:userId" component={SingleUser} />
+            <Route exact path="/cart/:userId" component={Cart} />
             <Redirect to="/" />
           </Switch>
       </div>
@@ -37,12 +49,19 @@ class Root extends Component {
   }
 }
 
-const mapStateToProps = null;
+const mapStateToProps = state => ({
+  user: state.user
+}) ;
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchInitialData: () => {
     dispatch(fetchDragons());
-    dispatch(fetchUser());
+    // dispatch(fetchUsers());
+    dispatch(fetchOrders());
+    dispatch(fetchUser()) ;
+  },
+  fetchCartData: (userId) => {
+    dispatch(fetchCartOrders(userId));
   }
 });
 
