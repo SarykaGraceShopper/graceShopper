@@ -20,7 +20,10 @@ function SingleDragon(props) {
           }).map(dragon => {
             return (
               <div key={dragon.id}>{dragon.name}<br />
-                <img className="dragon" src={dragon.image} />
+                <img className="dragonName" src={dragon.image} />
+                <button onClick={() => handleAddToCart()} type="addDragonToCart" className="btn btn-default">
+                  Add Dragon to Cart
+                  </button>
               </div>
             )
           })
@@ -31,4 +34,25 @@ function SingleDragon(props) {
 
 const mapStateToProps = (state) => ({dragons: state.dragons})
 
-export default connect(mapStateToProps)(SingleDragon);
+const mapDispatchToProps = function (dispatch, ownProps) {
+    const studentId = ownProps.match.params.studentId;
+    return {
+        handleAddToCart(evt) {
+            evt.preventDefault();
+            const name = evt.target.dragonName.value;
+            //todo rest of attributes
+            const addCartOrderDispatch = createCartOrder({
+               name: name
+              },
+                ownProps.history)
+            dispatch(addCartOrderDispatch)
+                .then((res) => {
+                })
+                .catch(err => {
+                    dispatch(writeEmailError(true))
+                })
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleDragon);

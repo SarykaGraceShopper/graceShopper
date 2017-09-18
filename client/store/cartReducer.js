@@ -1,30 +1,32 @@
 import axios from 'axios'
 import history from '../history'
 
-//this reducer keeps track of all orders in user's current cart
+//this reducer keeps track of all dragons in user's current cart
 
 //action types
 const INITIALIZE = 'INITIALIZE_CART'
-const CREATE = 'CREATE_CART_ORDER'
-const UPDATE = 'UPDATE_CART_ORDER'
-const DELETE = 'DELETE_CART_ORDER'
+const CREATE = 'CREATE_CART_DRAGON'
+const UPDATE = 'UPDATE_CART_DRAGON'
+const DELETE = 'DELETE_CART_DRAGON'
 
 //action
-const init = orders => ({type: INITIALIZE, orders})
-const addAnOrder = order => ({type: CREATE, order})
-const updateAOrder = order => ({type: UPDATE, order})
-const deleteAOrder = order => ({type: DELETE, order})
+const init = cart => ({type: INITIALIZE, cart})
+const addCartDragon = dragon => ({type: CREATE, dragon})
+const updateCartDragon = dragon => ({type: UPDATE, dragon})
+const deleteCartDragon = dragon => ({type: DELETE, dragon})
 
 //reducers
-export default function reducer (orders = [], action) {
+export default function reducer (cart = {}, action) {
   switch(action.type) {
 
     case INITIALIZE:
-      return action.orders;
+      return action.cart;
 
     case CREATE:
-      return [...orders, action.orders];
-
+      return Object.assign({}, cart,
+        {dragons: [...cart.dragons, action.dragon]});
+      
+    //todo: fix all of these
     case UPDATE:
       const filtered = orders.filter(order => order.id !== action.order.id)
       return [...filtered, action.order]
@@ -33,7 +35,7 @@ export default function reducer (orders = [], action) {
       return orders.filter(order => order.id !== action.order.id)
 
     default:
-      return orders
+      return cart
   }
 }
 
@@ -52,7 +54,7 @@ export const createCartOrder = (info) => dispatch => {
   axios.post('/api/orders', info)
     .then(res => res.data)
     .then(newOrder => {
-      const action = addAnOrder(newOrder)
+      const action = addCartOrder(newOrder)
       dispatch(action);
     })
 }
@@ -61,7 +63,7 @@ export const updateCartOrder = (info, orderId) => dispatch => {
   axios.put(`/api/orders/${orderId}`, info)
     .then(res => res.data)
     .then(updatedInfo => {
-      const updateAction = updateAOrder(updatedInfo)
+      const updateAction = updateCartOrder(updatedInfo)
       dispatch(updateAction)
 
     })
@@ -71,7 +73,7 @@ export const deleteCartOrder = (orderId) => dispatch => {
   axios.delete(`/api/orders/${orderId}`)
   .then(res => (res.data))
   .then(order => {
-    const deleteAction = deleteAOrder(order)
+    const deleteAction = deleteCartOrder(order)
     dispatch(deleteAction)
   })
 }
