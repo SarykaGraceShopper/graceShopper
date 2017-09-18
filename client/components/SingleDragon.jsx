@@ -60,8 +60,6 @@ const mapDispatchToProps = function (dispatch, ownProps) {
     const dragonId = ownProps.match.params.dragonId;
     return {
         handleAddToCart(evt) {
-            // evt.preventDefault();
-            //todo rest of attributes
             const addCartOrderDispatch = addCartDragon(dragonId)
             dispatch(addCartOrderDispatch)
         }

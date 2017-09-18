@@ -21,6 +21,9 @@ class Root extends Component {
 
   componentDidMount() {
     this.props.fetchInitialData();
+    if(this.props.user.id) {
+      this.props.fetchCartData(this.props.user.id)
+    }
   }
 
   render() {
@@ -43,15 +46,19 @@ class Root extends Component {
   }
 }
 
-const mapStateToProps = null;
+const mapStateToProps = state => ({
+  user: state.user
+}) ;
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchInitialData: () => {
     dispatch(fetchDragons());
     // dispatch(fetchUsers());
     dispatch(fetchOrders());
-    dispatch(fetchCartOrders(1));
-    dispatch(fetchUser());
+    dispatch(fetchUser()) ;
+  },
+  fetchCartData: (userId) => {
+    dispatch(fetchCartOrders(userId));
   }
 });
 
