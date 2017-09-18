@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {withRouter} from 'react-router'
+import { logout } from '../store'
 import { Link, NavLink } from 'react-router-dom';
 
-export default function Navbar(props) {
+function Navbar(props) {
   return (
     <nav id="myNavbar" className="navbar navbar-default navbar-fixed-top" role="navigation">
       <div className="container">
@@ -12,23 +14,52 @@ export default function Navbar(props) {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <Link className="navbar-brand" to="/">DISCOUNT DRAGONS</Link>
+          <Link className="navbar-brand" to="/"></Link>
         </div>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="nav navbar-nav navbar-right">
             <li className={
-              (!props.match.params.active)
-                ? 'active'
-                : ''
-            }><NavLink to="/">Home</NavLink></li>
+              (props.location.pathname === '/') &&
+                'active'
+            }><NavLink to="/">HOME</NavLink></li>
             <li className={
-              (props.match.params.active === 'dragons')
-                ? 'active'
-                : ''
-            }><NavLink to="/campuses">Campuses</NavLink></li>
+              (props.location.pathname === '/dragons') &&
+                'active'
+            }><NavLink to="/dragons">DRAGONS</NavLink></li>
+            {
+              !props.isLoggedIn
+              && <li className={
+                (props.location.pathname === '/signup') &&
+                  'active'
+              }><NavLink to="/signup">sign up</NavLink></li>
+            }
+            <li className={
+              (props.location.pathname === '/login') &&
+                'active'
+            }> {
+              props.isLoggedIn
+              ? <NavLink to="/login" onClick={props.handleClick}>logout</NavLink>
+              : <NavLink to="/login">login</NavLink>
+            } </li>
           </ul>
         </div>
       </div>
     </nav>
   );
 }
+
+const mapState = (state) => {
+  return {
+    isLoggedIn: !!state.user.id
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+    handleClick () {
+      dispatch(logout())
+    }
+  }
+}
+
+export default withRouter(connect(mapState, mapDispatch)(Navbar))

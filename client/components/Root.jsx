@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux'
 
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
 import store from '../store';
-import { fetchDragons } from '../store/dragonsReducer'
-import { fetchUsers } from '../store/usersReducer'
+import { fetchDragons } from '../store/dragonsReducer';
+import { fetchUser } from '../store/authReducer';
+import {Login, Signup} from './AuthForm.jsx';
 import { fetchOrders } from '../store/ordersReducer'
 import { fetchCartOrders } from '../store/cartReducer'
 
@@ -23,17 +25,19 @@ class Root extends Component {
 
   render() {
     return (
-      <div>
-        <Route exact path="/" component={Navbar} />
-        <Route exact path="/:active" component={Navbar} />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/dragons" component={AllDragons} />
-          <Route exact path="/dragon/:dragonId" component={SingleDragon} />
-          <Route exact path="/user/:userId" component={SingleUser} />
-          <Route exact path="/cart/:userId" component={Cart} />
-          <Redirect to="/" />
-        </Switch>
+
+      <div className="container">
+         <Navbar/>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/dragons" component={AllDragons} />
+            <Route exact path="/dragons/:dragonId" component={SingleDragon} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/user/:userId" component={SingleUser} />
+            <Route exact path="/cart/:userId" component={Cart} />
+            <Redirect to="/" />
+          </Switch>
       </div>
     );
   }
@@ -44,10 +48,11 @@ const mapStateToProps = null;
 const mapDispatchToProps = dispatch => ({
   fetchInitialData: () => {
     dispatch(fetchDragons());
-    dispatch(fetchUsers());
+    // dispatch(fetchUsers());
     dispatch(fetchOrders());
     dispatch(fetchCartOrders(1));
+    dispatch(fetchUser());
   }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Root);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Root));
