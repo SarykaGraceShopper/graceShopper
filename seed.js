@@ -8,7 +8,7 @@ const data = {
     {name: 'romeo', color: 'green', breed: 'dreamer', price: '1000', badness: '0', image: 'https://i.pinimg.com/originals/d3/b3/e0/d3b3e08174ad956b7456005ed0dea438.jpg'},
     {name: 'smore', color: 'orange', breed: 'camper', price: '1500', badness: '2', image: 'https://i.pinimg.com/originals/23/c8/01/23c8011e2def136d2b247cefae9216f6.jpg'},
     {name: 'too sweet', color: 'pink', breed: 'qt', price: '3500', badness: '6', image: 'https://i.pinimg.com/736x/cd/93/28/cd93289c1b3f1ba51b1d172cb7a1d285--fire-dragon-baby-dragon.jpg'},
-    {name: 'fat cat', color: 'agua', breed: 'sweettooth', price: '1000', badness: '8', image: 'https://orig00.deviantart.net/2042/f/2011/069/b/e/be45657d2e7180d69b85eae35af7d38a-d3bbg3d.jpg'},
+    {name: 'fat cat', color: 'aqua', breed: 'sweettooth', price: '1000', badness: '8', image: 'https://orig00.deviantart.net/2042/f/2011/069/b/e/be45657d2e7180d69b85eae35af7d38a-d3bbg3d.jpg'},
     {name: 'baby', color: 'green', breed: 'qt', price: '200', badness: '9', image: 'https://i.pinimg.com/736x/6c/12/9c/6c129cf7a0d84871beb221995e7cf170--dragon-party-baby-dragon.jpg'},
     {name: 'rawr', color: 'green', breed: 'dreamer', price: '500', badness: '1', image: 'https://t1.rbxcdn.com/f50a8ce5e0e5b22e17a3f82c5bc2cba8'},
     {name: 'juliet', color: 'green', breed: 'dreamer', price: '5000', badness: '0', image: 'http://1.bp.blogspot.com/_oWhe6DqAFZk/TIfscH1PliI/AAAAAAAAAC0/lqtD5BDC88I/s1600/dino.jpg'},
