@@ -11,8 +11,10 @@ function Home(props) {
   // }
 
   return (
-    <div>
-    Hey There!! Wanna buy some dragons??? You are in the right place!!!
+    <div className="row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+    <p>Hey There!! Wanna buy some dragons??? You are in the right place!!!</p>
+      </div>
     </div>
   );
 }

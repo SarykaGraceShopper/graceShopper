@@ -13,7 +13,7 @@ function Navbar(props) {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <Link className="navbar-brand" to="/">DISCOUNT DRAGONS</Link>
+          <Link className="navbar-brand" to="/"></Link>
         </div>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="nav navbar-nav navbar-right">
