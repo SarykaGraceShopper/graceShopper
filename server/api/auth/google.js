@@ -15,7 +15,6 @@ passport.use(new GoogleStrategy({
     const googleId = profile.id;
     const name = profile.displayName;
     const email = profile.emails[0].value;
-    var values = {googleId, name, email}
     var selector = {where: {googleId}}
     User.findOne(selector)
       .then(user => user
@@ -37,8 +36,6 @@ router.get('/verify',
   passport.authenticate('google',  // strategy name
                         { failureRedirect: '/login' }),
   function(req, res) {
-    console.log('in the verify redirect')
-    console.log(req.url)
     // Successful authentication, redirect home.
     res.redirect('/');
   }

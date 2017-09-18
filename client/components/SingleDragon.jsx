@@ -5,10 +5,6 @@ import history from '../history'
 import store from '../store'
 
 function SingleDragon(props) {
-  // function handleClick(event) {
-  //   event.preventDefault();
-  //   history.goBack();
-  // }
   return (
     <div>
       {
