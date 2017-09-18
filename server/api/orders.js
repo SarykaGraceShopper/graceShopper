@@ -45,6 +45,9 @@ router.put('/:orderId', (req, res, next) => {
     .then(order => res.json(order))
 })
 
+// returning: true would be good here --OB
+// needs .catch for error handling --FF
+
 router.delete('/:orderId', (req, res, next) => {
   Order.findOne({
     where: {
@@ -61,6 +64,8 @@ router.delete('/:orderId', (req, res, next) => {
     })
     .catch(next);
 });
+
+// look at comments in dragons.js to refactor this --FF
 
 
 module.exports = router

@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 router.get('/:reviewId', (req, res, next) => {
   Review.findOne({
     where: {id: req.params.reviewId},
-    include: [Dragon]
+    include: [Dragon] // require in Dragon so this works --OB
   })
     .then(review => res.json(review))
     .catch(next);
@@ -56,5 +56,7 @@ router.delete('/delete/:reviewId', (req, res, next) => {
   .catch(next);
 });
 
+// don't need to put delete in the actual route, don't write verbs in URL matching! --OB
+// look at dragons.js for relevant comments --FF
 
 module.exports = router

@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import history from '../history'
 
+// delete the imports of things you don't actually use --FF
+
 function Home(props) {
 
   return (

@@ -34,6 +34,7 @@ router.put('/:dragonId', (req, res, next) => {
     where: {
       id: req.params.dragonId
     }
+  // use returning: true to get around doing another database call --FF
   })
     .then(result => {
       return Dragon.findOne({
@@ -44,6 +45,8 @@ router.put('/:dragonId', (req, res, next) => {
     })
     .then(dragon => res.json(dragon))
 })
+
+// no error handling for this route --FF
 
 router.delete('/:dragonId', (req, res, next) => {
   Dragon.findOne({
@@ -61,6 +64,9 @@ router.delete('/:dragonId', (req, res, next) => {
     })
     .catch(next);
 });
+
+// get rid of unused variables --FF
+// could be better to get rid of lines 50-54 and change line 61 so that it doesn't expect result --OB
 
 
 module.exports = router

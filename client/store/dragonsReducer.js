@@ -24,7 +24,7 @@ export default function reducer (dragons = [], action) {
 
     case CREATE:
       return [...dragons, action.dragons];
-
+      // should probably change this to action.dragon
     case UPDATE:
       const filtered = dragons.filter(dragon => dragon.id !== action.dragon.id)
       return [...filtered, action.dragon]
@@ -75,3 +75,6 @@ export const deleteDragon = (dragonId) => dispatch => {
     dispatch(deleteAction)
   })
 }
+
+// add error handling for these 3 thunk creators --FF
+// return all of these axios requests so that you can use what they return (you can .then off of them) in other places --OB

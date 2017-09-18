@@ -17,6 +17,8 @@ const Order = db.define('order', {
 }
 );
 
+// you might want to store shipping/billing address with the order --FF
+
 // instance methods
 Order.prototype.getTotal = function () {
   return this.dragons.reduce((start, dragon) => start.price + dragon.price);

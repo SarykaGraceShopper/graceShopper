@@ -25,6 +25,8 @@ passport.use(new GoogleStrategy({
     .catch(done)
 }));
 
+// no console.logs! --FF
+
 // // register our strategy with passport
 // passport.use(strategy);
 

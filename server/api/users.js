@@ -86,5 +86,8 @@ router.delete('/delete/:userId', (req, res, next) => {
   .catch(next);
 });
 
+// don't put verbs in routes --OB
+// look at dragons.js for more comments --FF
+
 
 module.exports = router
