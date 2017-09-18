@@ -20,10 +20,9 @@ import Cart from './Cart.jsx'
 class Root extends Component {
 
   componentDidMount() {
-    this.props.fetchInitialData();
-    if(this.props.user.id) {
-      this.props.fetchCartData(this.props.user.id)
-    }
+    this.props.fetchInitialData()
+            console.log("USER props", this.props )
+
   }
 
   render() {
@@ -55,7 +54,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     dispatch(fetchDragons());
     // dispatch(fetchUsers());
     dispatch(fetchOrders());
-    dispatch(fetchUser()) ;
+    dispatch(fetchUser()).then( (user) => {
+          dispatch(fetchCartOrders(user.id));
+    }
+      
+    ) ;
   },
   fetchCartData: (userId) => {
     dispatch(fetchCartOrders(userId));

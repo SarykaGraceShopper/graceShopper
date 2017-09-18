@@ -27,6 +27,7 @@ export const fetchUser = () => dispatch => {
   return axios.get('/api/users/currentUser')
     .then(res => {
       dispatch(getUser(res.data))
+      return res.data;
     })
     .catch(err=>console.log(err))
 }

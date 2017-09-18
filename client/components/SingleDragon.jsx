@@ -17,7 +17,9 @@ function SingleDragon(props) {
     history.goBack();
   }
 
-  const {handleAddToCart} = props;
+  const {handleAddToCart, cart} = props;
+
+  console.log("CART CHECKING",props)
 
   return (
     <div className="adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag">
@@ -47,20 +49,20 @@ function SingleDragon(props) {
           only ${dragon.price / 100}!
           </div>
       </div>
-                      <button onClick={() => handleAddToCart()} type="addDragonToCart" className="btn btn-default">
+                      <button onClick={() => handleAddToCart( props.cart && props.cart.id)} value={cart.id} name="addDragonToCart" type="addDragonToCart" className="btn btn-default">
                   Add Dragon to Cart
                   </button>
     </div>
   );
 }
 
-const mapStateToProps = (state) => ({dragons: state.dragons})
+const mapStateToProps = (state) => ({dragons: state.dragons, cart: state.cart})
 
 const mapDispatchToProps = function (dispatch, ownProps) {
     const dragonId = ownProps.match.params.dragonId;
     return {
-        handleAddToCart(evt) {
-            const addCartOrderDispatch = addCartDragon(dragonId)
+        handleAddToCart(cartId) {
+            const addCartOrderDispatch = addCartDragon(cartId, dragonId)
             dispatch(addCartOrderDispatch)
         }
     };
