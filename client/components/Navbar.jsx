@@ -18,19 +18,15 @@ function Navbar(props) {
         </div>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="nav navbar-nav navbar-right">
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/dragons">Dragons</NavLink></li>
+            <li><NavLink to="/">HOME</NavLink></li>
+            <li><NavLink to="/dragons">DRAGONS</NavLink></li>
             {
-            props.isLoggedIn
-            ? <div>
-              {/* The navbar will show these links after you log in */}
-              <a href='#' onClick={props.handleClick}>Logout</a>
-            </div>
-            : <div>
-              {/* The navbar will show these links before you log in */}
-              <li><NavLink to='/login'>Login</NavLink></li>
-              <li><NavLink to='/signup'>Sign Up</NavLink></li>
-            </div>
+              props.isLoggedIn // Logout vs Login/Signup display
+              ? <li><NavLink to="/login" onClick={props.handleClick}>logout</NavLink></li>
+              : <li><NavLink to="/login">login</NavLink></li>
+            } {
+              !props.isLoggedIn
+              && <li><NavLink to="/signup">sign up</NavLink></li>
             }
           </ul>
         </div>
