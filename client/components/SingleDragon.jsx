@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import history from '../history'
 import store from '../store'
+import { addCartDragon } from '../store/cartReducer'
 
 function SingleDragon(props) {
 
@@ -15,6 +16,8 @@ function SingleDragon(props) {
     event.preventDefault();
     history.goBack();
   }
+
+  const {handleAddToCart} = props;
 
   return (
     <div className="adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag">
@@ -44,10 +47,23 @@ function SingleDragon(props) {
           only ${dragon.price / 100}!
           </div>
       </div>
+                      <button onClick={() => handleAddToCart()} type="addDragonToCart" className="btn btn-default">
+                  Add Dragon to Cart
+                  </button>
     </div>
   );
 }
 
 const mapStateToProps = (state) => ({dragons: state.dragons})
 
-export default connect(mapStateToProps)(SingleDragon);
+const mapDispatchToProps = function (dispatch, ownProps) {
+    const dragonId = ownProps.match.params.dragonId;
+    return {
+        handleAddToCart(evt) {
+            const addCartOrderDispatch = addCartDragon(dragonId)
+            dispatch(addCartOrderDispatch)
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SingleDragon);

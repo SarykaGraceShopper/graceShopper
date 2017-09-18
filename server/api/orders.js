@@ -45,6 +45,18 @@ router.put('/:orderId', (req, res, next) => {
     .then(order => res.json(order))
 })
 
+router.put('/:orderId/addDragon', (req, res, next) => {
+  Order.findOne({
+    where: { id: req.params.orderId },
+    include: [{ model: Dragon }]
+  })
+    .then(order => {
+      order.addDragon(req.body.id);
+      res.json(order);
+    })
+    .catch(next);
+});
+
 router.delete('/:orderId', (req, res, next) => {
   Order.findOne({
     where: {
