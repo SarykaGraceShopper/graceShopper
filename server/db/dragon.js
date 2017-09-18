@@ -23,10 +23,8 @@ const Dragon = db.define('dragon', {
     validate: {min: 0, max: 11}
   },
   image: {
-    type: Sequelize.VIRTUAL,
-    get: function () {
-      return `/img/dragons/${this.id}.jpg`
-    }
+    type: Sequelize.STRING,
+    validate: {isUrl: true}
   }
 }, {
   defaultScope: {

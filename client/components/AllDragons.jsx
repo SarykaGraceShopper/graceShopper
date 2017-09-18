@@ -7,11 +7,23 @@ import store from '../store'
 
 
 function AllDragons(props) {
+
+  function filterDragons(key, value) {
+    return props.dragons.filter(dragon => dragon[key] === value);
+  }
+
+  props.dragons && console.log(filterDragons('color', 'green'));
+
   return (
     <div className="adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag">
       <div className="row">
         <div className="col-sm-12 col-md-12 col-lg-12">
           <h1>Dragons</h1>
+          <div>narrow your search:&nbsp;
+            <select onChange="handleChange()">
+              <option name="whatever" value="whatever">whatever</option>
+            </select>
+          </div>
         </div>
       </div>
       <div className="row">
