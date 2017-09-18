@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import store from '../store';
 import { fetchDragons } from '../store/dragonsReducer';
-import { fetchUser } from '../store/authReducer';
+import { fetchUser } from '../store/userReducer';
 import {Login, Signup} from './AuthForm.jsx';
 import Navbar from './Navbar.jsx';
 import Home from './Home.jsx';
