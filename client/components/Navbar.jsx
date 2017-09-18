@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {withRouter} from 'react-router'
-import { logout } from '../store'
+import {withRouter} from 'react-router';
+import { logout } from '../store';
 import { Link, NavLink } from 'react-router-dom';
 
 function Navbar(props) {

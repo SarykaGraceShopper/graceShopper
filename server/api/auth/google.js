@@ -37,7 +37,7 @@ router.get('/verify',
                         { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/profile');
   }
   );
 
