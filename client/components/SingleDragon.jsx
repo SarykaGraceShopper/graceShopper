@@ -11,13 +11,19 @@ function SingleDragon(props) {
     return (dragon.id == props.match.params.dragonId)
   })[0];
 
+  // .find method would return the first thing it finds that matches the criterion, would work well here --OB
+
   function handleClick(event) {
     event.preventDefault();
     history.goBack();
   }
 
+  // handleClick could be defined outside the class so that the function isn't defined every time the page loads --OB
+  // could also turn the component into a class --OB
+
   return (
     <div className="adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag">
+    {/* use a better class name! --OB */}
       <div className="row">
         <div className="col-sm-12 col-md-12 col-lg-12">
           <button className="btn btn-default more-padding" onClick={handleClick}>
@@ -47,6 +53,9 @@ function SingleDragon(props) {
     </div>
   );
 }
+
+// you could use a join with strings where we have all these spans on line 46 --OB
+// you could put the functionality on lines 7-12 in the mapState --OB
 
 const mapStateToProps = (state) => ({dragons: state.dragons})
 

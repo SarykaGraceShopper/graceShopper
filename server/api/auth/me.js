@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const User = require('../../db/user')
 
+// require database instead and dot User model off of it --FF
+
 router.get('/', (req, res, next) => {
   res.json(req.user.sanitize());
 });
@@ -39,5 +41,7 @@ router.post('/logout', (req, res, next) => {
   req.logout();
   res.sendStatus(200);
 });
+
+// status on line 24 could be 204, "no content" --OB
 
 module.exports = router

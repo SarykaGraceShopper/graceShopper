@@ -48,6 +48,10 @@ function Navbar(props) {
   );
 }
 
+// Some repition here, you could make a navlist link component that just takes pathname and does everything else for you --OB
+// Spacing/indentation could be better here --FF
+// Look into react styleguides --OB
+
 const mapState = (state) => {
   return {
     isLoggedIn: !!state.user.id

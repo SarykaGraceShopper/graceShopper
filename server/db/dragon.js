@@ -34,4 +34,7 @@ const Dragon = db.define('dragon', {
   }
 })
 
+// another option for image URL would be storing an actual URL to an image online --OB
+// defaultScope and include: Power in your server files are redundant --FF
+
 module.exports = Dragon;

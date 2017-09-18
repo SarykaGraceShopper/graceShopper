@@ -23,6 +23,7 @@ const AuthForm = (props) => {
             <button type="submit" className="btn btn-default">{displayName}</button>
           </div>
           {error && error.response && <div> {error.response.data} </div>}
+          {/* You could put this entire expression inside a div instead of putting the div inside the expression --FF */}
         </form>
         <a href="api/auth/google">{displayName} with Google</a>
       </div>

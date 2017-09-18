@@ -45,6 +45,8 @@ router.put('/:powerId', (req, res, next) => {
     .then(power => res.json(power))
 })
 
+// needs .catch --FF
+
 router.delete('/:powerId', (req, res, next) => {
   Power.findOne({
     where: {
@@ -61,6 +63,8 @@ router.delete('/:powerId', (req, res, next) => {
     })
     .catch(next);
 });
+
+// see dragons.js for relevant comments
 
 
 module.exports = router

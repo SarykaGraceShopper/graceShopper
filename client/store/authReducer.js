@@ -21,6 +21,8 @@ export default function reducer (user={}, action) {
   }
 }
 
+// you can just return an empty object on line 18, you don't need to set the user to it --FF
+
 //thunk creators
 
 export const fetchUser = () => dispatch => {
@@ -41,6 +43,8 @@ export const auth = (email, password, method) =>
       .catch(error =>
         dispatch(getUser({error})))
 
+// you're setting the user to be the object of an error, here it's ok but if you got an error after the user is logged in, there could be issues --OB
+
 export const logout = () =>
   dispatch =>
     axios.post('api/auth/me/logout')
@@ -49,3 +53,6 @@ export const logout = () =>
         history.push('/login')
       })
       .catch(err => console.log(err))
+
+// console.error is better for logging errors than console.log --FF
+// check out react-toastr for error handling! --OB

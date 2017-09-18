@@ -11,6 +11,8 @@ import Home from './Home.jsx';
 import AllDragons from './AllDragons.jsx';
 import SingleDragon from './SingleDragon.jsx';
 
+// Unused dependency --OB
+
 
 class Root extends Component {
 
@@ -35,7 +37,12 @@ class Root extends Component {
   }
 }
 
+// 'exact' isn't necessary if there are no competing paths --FF
+// Inconsistent indentation --OB
+
 const mapStateToProps = null;
+
+// mapStateToProps doesn't need to be defined as null, just don't include it in the connect or pass it in as null (thinks the first is mapState and second is mapDispatch) --FF
 
 const mapDispatchToProps = dispatch => ({
   fetchInitialData: () => {
