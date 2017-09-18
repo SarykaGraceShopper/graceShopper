@@ -19,6 +19,7 @@ class  UpdateUser extends Component {
     this.handleEmail = this.handleEmail.bind(this)
     this.handleImage = this.handleImage.bind(this)
     this.handleShipping = this.handleShipping.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
 
@@ -38,6 +39,16 @@ class  UpdateUser extends Component {
     this.setState({shippingAddress: event.target.value});
   }
 
+ handleSubmit (event) {
+    event.preventDefault()
+    const id = this.props.user.id
+    const newUserInfo = {}
+    this.state.name.length ? newUserInfo.name = this.state.name : newUserInfo.name = this.props.user.name
+    this.state.email.length ? newUserInfo.email = this.state.email : newUserInfo.email = this.props.user.email
+    this.state.image.length ? newUserInfo.image = this.state.image : newUserInfo.image = this.props.user.image
+    this.state.shippingAddress.length ? newUserInfo.shippingAddress = this.state.shippingAddress : newUserInfo.shippingAddress = this.props.user.shippingAddress
+    store.dispatch(updateAUser(newUserInfo, id))
+  }
 
 
 
@@ -47,22 +58,22 @@ class  UpdateUser extends Component {
      <div className="row">
       <div className="col-sm-12 col-md-6 col-lg-6" style={{marginTop: '100px'}}>
         <h3> Your Profile Info </h3>
-        <form onSubmit={this.props.handleSubmit} name={name}>
+        <form onSubmit={this.handleSubmit} name={name}>
           <div className="form-group">
             <label htmlFor='Name'><small>Name</small></label>
-            <input name='name' type='text' placeholder={name} onChange={this.handleName} value={this.state.name.length ? this.state.name : this.props.name} className="form-control" />
+            <input name='name' type='text' placeholder={name} onChange={this.handleName} value={this.state.name} className="form-control" />
           </div>
           <div className="form-group">
             <label htmlFor='email'><small>Email</small></label>
-            <input name='email' type='text' placeholder={email} onChange={this.handleEmail} value={this.state.email.length ? this.state.email : this.props.email} className="form-control"/>
+            <input name='email' type='text' placeholder={email} onChange={this.handleEmail} value={this.state.email} className="form-control"/>
           </div>
           <div className="form-group">
             <label htmlFor='image'><small>Image (enter a url!)</small></label>
-            <input name='image' type='text' placeholder={image} onChange={this.handleImage} value={this.state.image.length ? this.state.image : this.props.image} className="form-control"/>
+            <input name='image' type='text' placeholder={image} onChange={this.handleImage} value={this.state.image} className="form-control"/>
           </div>
           <div className="form-group">
             <label htmlFor='shippingAddress'><small>Shipping Address</small></label>
-            <input name='shippingAddress' type='text' placeholder={shippingAddress} onChange={this.handleShipping} value={this.state.shippingAddress.length ? this.state.shippingAddress : this.props.shippingAddress} className="form-control"/>
+            <input name='shippingAddress' type='text' placeholder={shippingAddress} onChange={this.handleShipping} value={this.state.shippingAddress} className="form-control"/>
           </div>
           <div>
             <button className="btn btn-default" type='submit' name='submit' value={id}>Update</button>
@@ -78,28 +89,5 @@ const mapStateToProps = (state, ownProps) => ({
   user: state.user
 })
 
-const mapDispatch = (dispatch, ownProps) => {
-  return {
-    handleSubmit (event) {
-      event.preventDefault()
-      const id = +event.target.submit.value
-      const newUserInfo = {}
-      if (event.target.name.value.length) {
-        newUserInfo.name = event.target.name.value
-      }
-      if (event.target.email.value.length) {
-        newUserInfo.email = event.target.email.value
-      }
-      if (event.target.image.value.length) {
-        newUserInfo.image = event.target.image.value
-      }
-      if (event.target.shippingAddress.value.length) {
-        newUserInfo.shippingAddress = event.target.shippingAddress.value
-      }
 
-      dispatch(updateAUser(newUserInfo, id))
-    }
-  }
-}
-
-export default withRouter(connect(mapStateToProps, mapDispatch)(UpdateUser));
+export default withRouter(connect(mapStateToProps)(UpdateUser));
