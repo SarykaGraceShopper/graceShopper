@@ -7,9 +7,8 @@ import store from '../store'
 
 
 function AllDragons(props) {
-  console.log(props)
-  return(
-    <div>
+  return (
+    <div className="adjacent-jsx-elements-must-be-wrapped-in-an-enclosing-tag">
       <div className="row">
         <div className="col-sm-12 col-md-12 col-lg-12">
           <h1>Dragons</h1>
@@ -20,7 +19,8 @@ function AllDragons(props) {
           <div className="col-sm-6 col-md-6 col-lg-3" key={dragon.id}>
             <Link to={`/dragons/${dragon.id}`}>
               <h3>{dragon.name}</h3>
-              <img src={dragon.image} id={dragon.id} />
+                <div className="dragon-image" style={{backgroundImage: `url(${dragon.image})`}}>
+                </div>
             </Link>
           </div>
         ))}
