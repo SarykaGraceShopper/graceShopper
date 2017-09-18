@@ -8,7 +8,7 @@ const Order = require('./order');
 const User = db.define('user', {
   name: {
     type: Sequelize.STRING,
-    allowNull: false
+    allowNull: true
   },
   email: {
     type: Sequelize.STRING,
@@ -20,7 +20,7 @@ const User = db.define('user', {
     type: Sequelize.STRING
   },
   shippingAddress: {
-    type: Sequelize.STRING,    
+    type: Sequelize.STRING,
   },
   isAdmin: {
     type: Sequelize.BOOLEAN

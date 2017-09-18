@@ -5,15 +5,10 @@ import history from '../history'
 
 function Home(props) {
 
-  // function handleClick(event) {
-  //   event.preventDefault();
-  //   history.goBack();
-  // }
-
   return (
     <div className="row">
       <div class="col-sm-12 col-md-12 col-lg-12">
-    <p>Hey There!! Wanna buy some dragons??? You are in the right place!!!</p>
+    <p>Hey There, {props.email}!! Wanna buy some dragons??? You are in the right place!!!</p>
       </div>
     </div>
   );
@@ -21,7 +16,8 @@ function Home(props) {
 
 const mapStateToProps = function (state) {
   return {
-    // dragons: state.dragons
+    dragons: state.dragons,
+    email: state.user.email
   };
 };
 
