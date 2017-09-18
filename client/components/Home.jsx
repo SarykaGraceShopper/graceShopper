@@ -5,21 +5,15 @@ import history from '../history'
 
 function Home(props) {
 
-  // function handleClick(event) {
-  //   event.preventDefault();
-  //   history.goBack();
-  // }
-
   return (
-    <div>
-    Hey There!! Wanna buy some dragons??? You are in the right place!!!
-    </div>
+      <h2 style={{marginTop: '200px'}}> Welcome {props.email}! </h2>
   );
 }
 
 const mapStateToProps = function (state) {
   return {
-    // dragons: state.dragons
+    dragons: state.dragons,
+    email: state.user.email
   };
 };
 

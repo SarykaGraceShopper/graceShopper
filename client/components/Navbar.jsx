@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {withRouter} from 'react-router'
+import { logout } from '../store'
 import { Link, NavLink } from 'react-router-dom';
 
 function Navbar(props) {
@@ -19,6 +20,18 @@ function Navbar(props) {
           <ul className="nav navbar-nav navbar-right">
             <li><NavLink to="/">Home</NavLink></li>
             <li><NavLink to="/dragons">Dragons</NavLink></li>
+            {
+            props.isLoggedIn
+            ? <div>
+              {/* The navbar will show these links after you log in */}
+              <a href='#' onClick={props.handleClick}>Logout</a>
+            </div>
+            : <div>
+              {/* The navbar will show these links before you log in */}
+              <li><NavLink to='/login'>Login</NavLink></li>
+              <li><NavLink to='/signup'>Sign Up</NavLink></li>
+            </div>
+            }
           </ul>
         </div>
       </div>
@@ -26,4 +39,18 @@ function Navbar(props) {
   );
 }
 
-export default withRouter(Navbar)
+const mapState = (state) => {
+  return {
+    isLoggedIn: !!state.user.id
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
+    handleClick () {
+      dispatch(logout())
+    }
+  }
+}
+
+export default withRouter(connect(mapState, mapDispatch)(Navbar))
