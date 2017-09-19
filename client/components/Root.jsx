@@ -37,7 +37,7 @@ class Root extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/user/:userId" component={SingleUser} />
-            <Route exact path="/cart/:userId" component={Cart} />
+            <Route exact path="/cart" component={Cart} />
             <Route exact path="/profile" component={UpdateUser} />
             <Route exact path="/MissionStatement" component={MissionStatement} />
 

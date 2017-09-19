@@ -40,28 +40,34 @@ class SingleDragon extends Component {
             </button>
           </div>
         </div>
-        <div className="row">
+        <div className="row dragon-row">
           <div className="col-sm-12 col-md-6 col-lg-6">
             <div className="dragon-image" style={{backgroundImage: `url(${dragon.image})`}}>
             </div>
           </div>
-          <div className="col-sm-12 col-md-6 col-lg-6">
-            Name: {dragon.name}<br />
-            Color: {dragon.color}<br />
-            Breed: {dragon.breed}<br />
-            Badness: {dragon.badness}<br />
-            Powers: {(dragon.powers)
-                      ? dragon.powers.map((power, index) => (
-                        <span key={power.id}>{power.name}{(index !== dragon.powers.length - 1) && <span>, </span>}</span>
-                        ))
-                      : <span>none</span>
-                    }<br />
-            only ${dragon.price / 100}!
+          <div className="dragon-deets col-sm-12 col-md-6 col-lg-6">
+            <span className="dragon-label">name:</span>
+            <span className="dragon-description">&nbsp;{dragon.name}</span><br />
+            <span className="dragon-label">color:</span>
+            <span className="dragon-description">&nbsp;{dragon.color}</span><br />
+            <span className="dragon-label">breed:</span>
+            <span className="dragon-description">&nbsp;{dragon.breed}</span><br />
+            <span className="dragon-label">badness:</span>
+            <span className="dragon-description">&nbsp;{dragon.badness}</span><br />
+            <span className="dragon-label">powers:</span>
+            <span className="dragon-description">&nbsp;
+              {(dragon.powers)
+                ? dragon.powers.map(power => (power.name)).join(', ')
+                : 'none'
+              }</span><br />
+            <span className="dragon-price">only ${dragon.price / 100}!</span>
+            <div>
+              <button onClick={this.handleAddToCart} type="addDragonToCart" className="btn btn-primary">
+              Add Dragon to Cart
+              </button>
             </div>
+          </div>
         </div>
-        <button onClick={this.handleAddToCart} type="addDragonToCart" className="btn btn-default">
-        Add Dragon to Cart
-        </button>
       </div>
     );
   }
