@@ -108,9 +108,8 @@ export const deleteCartOrder = (orderId) => dispatch => {
 
 export const checkoutCartOrder = (orderId, cart, userId, history) => dispatch => {
   //change current db cart's cartId to null, pastOrderId to userId
-  cart.cartId = null;
-  cart.pastOrderId = userId;
-  axios.put(`/api/orders/${orderId}`, info)
+  console.log("CHECKOUTSTUFF ", orderId, cart, userId, )
+  axios.put(`/api/orders/${orderId}`, {pastOrderId: userId})
     .then(res => {
       //create new db cart for use
       const newCart = {

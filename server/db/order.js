@@ -22,5 +22,11 @@ Order.prototype.getTotal = function () {
   return this.dragons.reduce((start, dragon) => start.price + dragon.price);
 };
 
+//checkouts current cart by changing
+// pastOrderId to userId and userId to null
+Order.prototype.checkOut = function () {
+  return this.dragons.reduce((start, dragon) => start.price + dragon.price);
+};
+
 module.exports = Order;
 

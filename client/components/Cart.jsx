@@ -10,7 +10,7 @@ function Cart(props) {
 
     <div>
       <h3>Dragons in Your Cart :)</h3>
-      <button onClick={handleCheckout()} type="checkout" className="btn btn-default">
+      <button onClick={ () => handleCheckout(cart)} type="checkout" className="btn btn-default">
         Checkout
         </button>
       <div className="row">
@@ -46,10 +46,10 @@ const mapStateToProps = function (state, ownProps) {
 const mapDispatchToProps = function (dispatch, ownProps) {
   const userId = ownProps.match.params.userId;
   return {
-    handleCheckout() {
-      dispatch(checkoutCartOrder(ownProps.cart.id, ownProps.cart, userId, ownProps.history))
+    handleCheckout(cart) {
+      dispatch(checkoutCartOrder(cart.id, cart, userId, ownProps.history))
     }
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Cart));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Cart));
