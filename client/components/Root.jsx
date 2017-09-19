@@ -18,6 +18,7 @@ import SingleUser from './SingleUser.jsx';
 import Cart from './Cart.jsx'
 import UpdateUser from './UpdateUser.jsx'
 import MissionStatement from './MissionStatement.jsx'
+import Checkout from './Checkout.jsx'
 
 class Root extends Component {
 
@@ -40,7 +41,7 @@ class Root extends Component {
             <Route exact path="/cart" component={Cart} />
             <Route exact path="/profile" component={UpdateUser} />
             <Route exact path="/MissionStatement" component={MissionStatement} />
-
+            <Route exact path="/Checkout" component={Checkout} />
             <Redirect to="/" />
           </Switch>
       </div>
