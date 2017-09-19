@@ -1,15 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {withRouter} from 'react-router'
 
 function Cart(props) {
   const { cart } = props;
   return (
+
     <div>
+      {console.log(cart)}
       <h3>Dragons in Your Cart :)</h3>
       <div className="row">
         {
-          cart && cart.dragons.map(dragon => (
+          cart && cart.map(dragon => (
             <div className="col-xs-4" key={dragon.id}>
               <Link className="thumbnail" to={`/dragons/${dragon.id}`}>
                 <img src={dragon.image} />
@@ -33,9 +36,7 @@ const mapStateToProps = function (state, ownProps) {
     user: state.users.find(user => {
       return user.id == userId
     }),
-    cart: state.orders && state.orders.find(order => {
-      return order.cartId == userId
-    })
+    cart: state.cart
   };
 };
 
@@ -47,4 +48,4 @@ const mapStateToProps = function (state, ownProps) {
 //   }
 // }
 
-export default connect(mapStateToProps)(Cart);
+export default withRouter(connect(mapStateToProps)(Cart));
