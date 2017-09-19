@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {withRouter} from 'react-router';
 import { logout } from '../store';
 import { Link, NavLink } from 'react-router-dom';
+import MenuItem from './MenuItem.jsx';
 
 function Navbar(props) {
   return (
@@ -18,47 +19,24 @@ function Navbar(props) {
         </div>
         <div className="collapse navbar-collapse" id="navbarCollapse">
           <ul className="nav navbar-nav navbar-right">
-            <li className={
-              (props.location.pathname === '/') &&
-                'active'
-            }><NavLink to="/">HOME</NavLink></li>
-             <li className={
-              (props.location.pathname === '/missionStatement') &&
-                'active'
-            }><NavLink to="/missionStatement">MISSION<br />STATEMENT</NavLink></li>
-            <li className={
-              (props.location.pathname === '/dragons') &&
-                'active'
-            }><NavLink to="/dragons">DRAGONS</NavLink></li>
-            {
-              props.isLoggedIn
-            && <li className={
-              (props.location.pathname ==='/profile') &&
-              'active'
-            }><NavLink to="/profile">profile</NavLink></li>
+            <MenuItem menuPath="/" menuName="HOME" />
+            <MenuItem menuPath="/missionStatement" menuName="MISSION" />
+            <MenuItem menuPath="/dragons" menuName="DRAGONS" />
+            { props.isLoggedIn
+                && <MenuItem menuPath="/profile" menuName="profile" />
             }
-            {
-              props.isLoggedIn
-            && <li className={
-              (props.location.pathname ===`/cart/${props.user.id}`) &&
-              'active'
-            }><NavLink to={`/cart/${props.user.id}`}>cart</NavLink></li>
+            { props.isLoggedIn
+                ? <MenuItem menuPath="/cart" menuName="cart" />
+                : <MenuItem menuPath="/signup" menuName="sign up" />
             }
-            {
-              !props.isLoggedIn
-              && <li className={
-                (props.location.pathname === '/signup') &&
-                  'active'
-              }><NavLink to="/signup">sign up</NavLink></li>
-            }
-            <li className={
-              (props.location.pathname === '/login') &&
-                'active'
-            }> {
-              props.isLoggedIn
-              ? <NavLink to="/login" onClick={props.handleClick}>logout</NavLink>
-              : <NavLink to="/login">login</NavLink>
-            } </li>
+            <MenuItem
+              menuPath="/login"
+              menuName=
+                { props.isLoggedIn
+                  ? 'login'
+                  : 'logout'
+                }
+              />
           </ul>
         </div>
       </div>
