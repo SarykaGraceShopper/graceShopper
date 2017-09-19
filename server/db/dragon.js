@@ -22,6 +22,15 @@ const Dragon = db.define('dragon', {
     type: Sequelize.INTEGER,
     validate: {min: 0, max: 11}
   },
+  badnessRange: {
+    type: Sequelize.VIRTUAL,
+    get: function () {
+      if (this.badness === 0 ) return '0';
+      else if (this.badness <= 5) return '1-5';
+      else if (this.badness <= 10) return '6-10';
+      else return '11';
+    }
+  },
   image: {
     type: Sequelize.STRING,
     validate: {isUrl: true}

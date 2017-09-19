@@ -25,14 +25,14 @@ class AllDragons extends React.Component {
         if (key === whichKey) dragonSets.add(dragon[key]);
       }
     });
-    return Array.from(dragonSets).sort();
+    return Array.from(dragonSets);
   }
 
   filterDragons(key, value) {
     this.setState({
       filteredDragons: this.props.dragons.filter(dragon => dragon[key] === value),
       selectedKey: key,
-      selectedValue: value.toString()
+      selectedValue: value
     });
   }
 
@@ -63,7 +63,7 @@ class AllDragons extends React.Component {
                 >
                 <option value="color">color</option>
                 {
-                  this.makeSets('color').map((color, index) => (
+                  this.makeSets('color').sort().map((color, index) => (
                     <option key={index} name={color} value={color}>{color}</option>
                   ))
                 }
@@ -82,7 +82,7 @@ class AllDragons extends React.Component {
                 >
                 <option value="breed">breed</option>
                 {
-                  this.makeSets('breed').map((breed, index) => (
+                  this.makeSets('breed').sort().map((breed, index) => (
                     <option key={index} name={breed} value={breed}>{breed}</option>
                   ))
                 }
@@ -90,22 +90,21 @@ class AllDragons extends React.Component {
               <select
                 onChange=
                   {
-                    (event) => this.filterDragons('badness', event.target.value)
+                    (event) => this.filterDragons('badnessRange', event.target.value)
                   }
                 value=
                   {
-                    (this.state.selectedKey === 'badness')
+                    (this.state.selectedKey === 'badnessRange')
                       ? this.state.selectedValue
-                      : 'badness'
+                      : 'badnessRange'
                   }
                 >
-                <option value="badness">badness</option>
-                {
-                  this.makeSets('badness').map((badness, index) => (
-                    <option key={index} name={badness} value={badness}>{badness}</option>
-                  ))
-                }
-              </select>
+                <option value="badnessRange">badness</option>
+                <option value="0">0</option>
+                <option value="1-5">1-5</option>
+                <option value="6-10">6-10</option>
+                <option value="11">11</option>
+                </select>
           </div>
         </div>
         <div className="row">
