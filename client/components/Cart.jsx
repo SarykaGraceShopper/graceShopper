@@ -1,18 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import {withRouter} from 'react-router'
 
 function Cart(props) {
   const { cart } = props;
   return (
+
     <div>
-      <h3>Dragons</h3>
-      {/* TODO: check out button */}
-      {/* <span className="input-group-btn">
-        <Link to={`/new-dragon`}>
-          <button className="btn btn-default" type="submit">Create New Campus</button>
-        </Link>
-      </span> */}
+      {console.log(cart)}
+      <h3>Dragons in Your Cart :)</h3>
       <div className="row">
         {
           cart && cart.map(dragon => (
@@ -39,9 +36,7 @@ const mapStateToProps = function (state, ownProps) {
     user: state.users.find(user => {
       return user.id == userId
     }),
-    cart: state.orders && state.orders.find(order => {
-      return order.cartId == userId
-    })
+    cart: state.cart
   };
 };
 
@@ -53,4 +48,4 @@ const mapStateToProps = function (state, ownProps) {
 //   }
 // }
 
-export default connect(mapStateToProps)(Cart);
+export default withRouter(connect(mapStateToProps)(Cart));

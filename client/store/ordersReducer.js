@@ -5,9 +5,9 @@ import history from '../history'
 
 //action types
 const INITIALIZE = 'INITIALIZE_ORDER'
-const CREATE = 'CREATE_USER'
-const UPDATE = 'UPDATE_USER'
-const DELETE = 'DELETE_USER'
+const CREATE = 'CREATE_ORDER'
+const UPDATE = 'UPDATE_ORDER'
+const DELETE = 'DELETE_ORDER'
 
 //action
 const init = orders => ({type: INITIALIZE, orders})

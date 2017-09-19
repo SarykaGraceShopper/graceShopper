@@ -51,7 +51,7 @@ router.put('/:orderId/addDragon', (req, res, next) => {
     include: [{ model: Dragon }]
   })
     .then(order => {
-      order.addDragon(req.body.id);
+      order.addDragon(req.body.dragonId);
       res.json(order);
     })
     .catch(next);
@@ -73,6 +73,5 @@ router.delete('/:orderId', (req, res, next) => {
     })
     .catch(next);
 });
-
 
 module.exports = router

@@ -8,7 +8,9 @@ function Home(props) {
   return (
     <div className="row">
       <div className="col-sm-12 col-md-12 col-lg-12">
-    <p>Hey There, {props.email}!! Wanna buy some dragons??? You are in the right place!!!</p>
+        <p>Hey There, {props.email}!! Wanna buy some dragons??? You are in the right place!!!</p>
+        <p>Read more about us <Link to='/missionStatement'>here</Link></p>
+
       </div>
     </div>
   );
