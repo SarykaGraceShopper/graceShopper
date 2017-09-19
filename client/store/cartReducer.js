@@ -75,23 +75,17 @@ export const fetchCartOrders = (userId) => dispatch => {
 
 export const addCartDragon = (dragonId, userId) => dispatch => {
   return axios.get(`/api/users/${userId}/cart`)
+  .then(res => res.data.id)
+  .then(orderId => axios.put(`/api/orders/${orderId}/addDragon`, {dragonId: dragonId}))
   .then(res => {
-    res.data ?
-    res.data.id
-    :
-    (axios.post(`/api/orders`, {cartId: userId})
-    .then(res => res.data.id ))
-    .then(orderId => axios.put(`/api/orders/${orderId}/addDragon`, {dragonId: dragonId}))
-  .then(res => {
-    const dragonId = res.data.id
     return axios.get(`/api/dragons/${dragonId}`) }
   )
   .then(res=> {
     dispatch(addDragon(res.data))
     history.push(`/cart/${userId}`)
   })
-})
 }
+
 
 export const updateCartOrder = (info, orderId) => dispatch => {
   axios.put(`/api/orders/${orderId}`, info)
