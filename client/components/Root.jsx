@@ -56,10 +56,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchInitialData: () => {
     dispatch(fetchDragons());
     dispatch(fetchOrders());
-    dispatch(fetchUser()).then(res => res.data.id ?
-                               dispatch(fetchCartOrders(res.data.id))
-                               : null
-                               );
+    dispatch(fetchUser()).then(res => dispatch(fetchCartOrders(res.data.id)));
 }
 })
 
