@@ -9,15 +9,15 @@ const CREATE = 'CREATE_CART_DRAGON'
 const UPDATE = 'UPDATE_CART_DRAGON'
 const DELETE = 'DELETE_CART_DRAGON'
 const ADD = 'ADD_NEW_CART_DRAGON'
-const CLEAR = 'CLEAR_CART'
+const CLEAR = 'CLEAR_CART_OF_DRAGONS'
 
 //action
-const init = dragons => ({ type: INITIALIZE, dragons })
-const createCart = newCart => ({ type: CREATE })
-const update = dragon => ({ type: UPDATE, dragon })
-const remove = dragon => ({ type: DELETE, dragon })
-const addDragon = dragon => ({ type: ADD, dragon })
-const emptyCart = () => ({ type: CLEAR })
+const init = dragons => ({type: INITIALIZE, dragons})
+const createCart = newCart => ({type: CREATE})
+const update = dragon => ({type: UPDATE, dragon})
+const remove = dragon => ({type: DELETE, dragon})
+const addDragon = dragon => ({type: ADD, dragon })
+export const clearCart = cart => ({type: CLEAR})
 
 //cart id
 //todo: cleanup, find better way to get id
@@ -32,6 +32,9 @@ export default function reducer(cart = [], action) {
 
     case CREATE:
       return cart
+
+    case CLEAR:
+      return []
 
     case ADD:
       return [...cart, action.dragon]
@@ -55,37 +58,34 @@ export default function reducer(cart = [], action) {
 //thunk creators
 
 export const fetchCartOrders = (userId) => dispatch => {
+
   return axios.get(`/api/users/${userId}/cart`)
-    .then(res => {
-      if (res.data.id !== undefined) {
-        cartID = res.data.id;
-        dispatch(init(res.data.dragons))
-      } else
-        dispatch(createCart())
-    })
+    .then( res => res.data )
+      .then(res => {
+      dispatch(init(res.dragons)) }
+      )
     .catch(err => console.error('Fetching cart orders unsuccessful', err));
 }
 
 export const addCartDragon = (dragonId, userId) => dispatch => {
-  console.log('in axios get user cart 1');
   return axios.get(`/api/users/${userId}/cart`)
-    .then(res => {
-      const orderId = res.data.id;
-      console.log('in put request to add dragon');
-      return axios.put(`/api/orders/${orderId}/addDragon`, { dragonId: dragonId })
-    })
-    .then(res => {
-      console.log('in single dragon page to get dragon object');
-      return axios.get(`/api/dragons/${dragonId}`)
-    }
-    )
-    .then(res => {
-      console.log('in add dragon dispatch command');
-      console.log(res.data)
-      dispatch(addDragon(res.data))
-      history.push(`/cart/${userId}`)
-    })
-}
+  .then(res => res.data ?
+        res.data.id :
+        (axios.post(`/api/orders/`, {cartId: userId})
+        .then(res=>res.data.id)))
+        .then(orderId =>
+          axios.put(`/api/orders/${orderId}/addDragon`, {dragonId: dragonId}))
+        .then(res => {
+          return axios.get(`/api/dragons/${dragonId}`) }
+        )
+        .then(res=> {
+          dispatch(addDragon(res.data))
+          history.push(`/cart/${userId}`)
+        })
+      }
+
+
+
 
 export const updateCartOrder = (info, orderId) => dispatch => {
   axios.put(`/api/orders/${orderId}`, info)
@@ -118,7 +118,7 @@ export const checkoutCartOrder = (orderId, cart, userId, history) => dispatch =>
       axios.post(`/api/orders`, newCart)
         .then(res => {
           //clear store state cart
-          dispatch(emptyCart());
+          dispatch(clearCart());
           history.push(`/cart`)
           res.json(data)
         })
