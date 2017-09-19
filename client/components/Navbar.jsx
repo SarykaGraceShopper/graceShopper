@@ -27,6 +27,13 @@ function Navbar(props) {
                 'active'
             }><NavLink to="/dragons">DRAGONS</NavLink></li>
             {
+              props.isLoggedIn
+            && <li className={
+              (props.location.pathname ==='/profile') &&
+              'active'
+            }><NavLink to="/profile">PROFILE</NavLink></li>
+            }
+            {
               !props.isLoggedIn
               && <li className={
                 (props.location.pathname === '/signup') &&
