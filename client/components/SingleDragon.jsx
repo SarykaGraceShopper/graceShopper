@@ -40,27 +40,27 @@ class SingleDragon extends Component {
             </button>
           </div>
         </div>
-        <div className="row">
+        <div className="row dragon-row">
           <div className="col-sm-12 col-md-6 col-lg-6">
             <div className="dragon-image" style={{backgroundImage: `url(${dragon.image})`}}>
             </div>
           </div>
           <div className="dragon-deets col-sm-12 col-md-6 col-lg-6">
-            <span className="label">name:</span>
-            <span className="description"> {dragon.name}</span><br />
-            <span className="label">color:</span>
-            <span className="description"> {dragon.color}</span><br />
-            <span className="label">breed:</span>
-            <span className="description"> {dragon.breed}</span><br />
-            <span className="label">badness:</span>
-            <span className="description"> {dragon.badness}</span><br />
-            <span className="label">powers:</span>
-            <span className="description">
+            <span className="dragon-label">name:</span>
+            <span className="dragon-description">&nbsp;{dragon.name}</span><br />
+            <span className="dragon-label">color:</span>
+            <span className="dragon-description">&nbsp;{dragon.color}</span><br />
+            <span className="dragon-label">breed:</span>
+            <span className="dragon-description">&nbsp;{dragon.breed}</span><br />
+            <span className="dragon-label">badness:</span>
+            <span className="dragon-description">&nbsp;{dragon.badness}</span><br />
+            <span className="dragon-label">powers:</span>
+            <span className="dragon-description">&nbsp;
               {(dragon.powers)
                 ? dragon.powers.map(power => (power.name)).join(', ')
                 : 'none'
               }</span><br />
-            <span className="price">only ${dragon.price / 100}!</span>
+            <span className="dragon-price">only ${dragon.price / 100}!</span>
             <div>
               <button onClick={this.handleAddToCart} type="addDragonToCart" className="btn btn-primary">
               Add Dragon to Cart
