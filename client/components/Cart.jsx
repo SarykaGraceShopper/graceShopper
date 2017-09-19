@@ -6,16 +6,10 @@ function Cart(props) {
   const { cart } = props;
   return (
     <div>
-      <h3>Dragons</h3>
-      {/* TODO: check out button */}
-      {/* <span className="input-group-btn">
-        <Link to={`/new-dragon`}>
-          <button className="btn btn-default" type="submit">Create New Campus</button>
-        </Link>
-      </span> */}
+      <h3>Dragons in Your Cart :)</h3>
       <div className="row">
         {
-          cart && cart.map(dragon => (
+          cart && cart.dragons.map(dragon => (
             <div className="col-xs-4" key={dragon.id}>
               <Link className="thumbnail" to={`/dragons/${dragon.id}`}>
                 <img src={dragon.image} />
