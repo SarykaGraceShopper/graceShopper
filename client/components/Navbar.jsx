@@ -26,15 +26,15 @@ function Navbar(props) {
                 && <MenuItem menuPath="/profile" menuName="profile" />
             }
             { props.isLoggedIn
-                ? <MenuItem menuPath="/cart" menuName="cart" />
+                ? <MenuItem menuPath={`/cart/${props.user.id}`} menuName="cart" />
                 : <MenuItem menuPath="/signup" menuName="sign up" />
             }
             <MenuItem
               menuPath="/login"
               menuName=
                 { props.isLoggedIn
-                  ? 'login'
-                  : 'logout'
+                  ? 'logout'
+                  : 'login'
                 }
               />
           </ul>
