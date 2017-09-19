@@ -25,7 +25,7 @@ function Navbar(props) {
              <li className={
               (props.location.pathname === '/missionStatement') &&
                 'active'
-            }><NavLink to="/missionStatement">MISSION STATEMENT</NavLink></li>
+            }><NavLink to="/missionStatement">MISSION<br />STATEMENT</NavLink></li>
             <li className={
               (props.location.pathname === '/dragons') &&
                 'active'
@@ -35,14 +35,14 @@ function Navbar(props) {
             && <li className={
               (props.location.pathname ==='/profile') &&
               'active'
-            }><NavLink to="/profile">PROFILE</NavLink></li>
+            }><NavLink to="/profile">profile</NavLink></li>
             }
             {
               props.isLoggedIn
             && <li className={
               (props.location.pathname ===`/cart/${props.user.id}`) &&
               'active'
-            }><NavLink to={`/cart/${props.user.id}`}>your cart</NavLink></li>
+            }><NavLink to={`/cart/${props.user.id}`}>cart</NavLink></li>
             }
             {
               !props.isLoggedIn
