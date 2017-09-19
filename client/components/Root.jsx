@@ -14,18 +14,15 @@ import Navbar from './Navbar.jsx';
 import Home from './Home.jsx';
 import AllDragons from './AllDragons.jsx';
 import SingleDragon from './SingleDragon.jsx';
-import UpdateUser from './UpdateUser.jsx'
 import SingleUser from './SingleUser.jsx';
 import Cart from './Cart.jsx'
-
+import UpdateUser from './UpdateUser.jsx'
+import MissionStatement from './MissionStatement.jsx'
 
 class Root extends Component {
 
   componentDidMount() {
-    this.props.fetchInitialData();
-    if(this.props.user.id) {
-      this.props.fetchCartData(this.props.user.id)
-    }
+    this.props.fetchInitialData()
   }
 
   render() {
@@ -39,9 +36,11 @@ class Root extends Component {
             <Route exact path="/dragons/:dragonId" component={SingleDragon} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Signup} />
-            <Route exact path="/profile" component={UpdateUser} />
             <Route exact path="/user/:userId" component={SingleUser} />
             <Route exact path="/cart/:userId" component={Cart} />
+            <Route exact path="/profile" component={UpdateUser} />
+            <Route exact path="/MissionStatement" component={MissionStatement} />
+
             <Redirect to="/" />
           </Switch>
       </div>
@@ -56,13 +55,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchInitialData: () => {
     dispatch(fetchDragons());
-    // dispatch(fetchUsers());
     dispatch(fetchOrders());
-    dispatch(fetchUser()) ;
-  },
-  fetchCartData: (userId) => {
-    dispatch(fetchCartOrders(userId));
-  }
-});
+    dispatch(fetchUser()).then(res =>
+                               dispatch(fetchCartOrders(res.data.id)));
+}
+})
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Root));

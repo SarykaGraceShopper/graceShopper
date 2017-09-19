@@ -8,30 +8,32 @@ const INITIALIZE = 'INITIALIZE_CART'
 const CREATE = 'CREATE_CART_DRAGON'
 const UPDATE = 'UPDATE_CART_DRAGON'
 const DELETE = 'DELETE_CART_DRAGON'
+const ADD = 'ADD_NEW_CART_DRAGON'
 
 //action
-const init = cart => ({type: INITIALIZE, cart})
-const create = newCart => ({type: CREATE, newCart})
+const init = dragons => ({type: INITIALIZE, dragons})
+const create = newCart => ({type: CREATE})
 const update = dragon => ({type: UPDATE, dragon})
 const remove = dragon => ({type: DELETE, dragon})
+const add = dragon => ({type: ADD, dragon })
 
 //cart id
 //todo: cleanup, find better way to get id
 let cartID = -1
 
 //reducers
-export default function reducer (cart = {}, action) {
+export default function reducer (cart = [], action) {
   switch(action.type) {
 
     case INITIALIZE:
-      return action.cart;
+      return action.dragons;
 
     case CREATE:
-      return action.newCart;
-    // return Object.assign({}, cart,
-      //   {dragons: [...cart.dragons, action.dragon]});
-      
-    //todo: fix all of these
+      return cart
+
+    case ADD:
+      return [...cart, action.newDragon]
+
     case UPDATE:
       const filtered = orders.filter(order => order.id !== action.order.id)
       return [...filtered, action.order]
@@ -51,18 +53,15 @@ export const fetchCartOrders = (userId) => dispatch => {
   return axios.get(`/api/users/${userId}/cart`)
     .then(res => {
       cartID = res.data.id;
-      dispatch(init(res.data))
+      console.log(res)
+      dispatch(init(res.data.dragons))
+
     })
     .catch(err => console.error('Fetching cart orders unsuccessful', err));
 }
 
-export const addCartDragon = (dragonId) => dispatch => {
-  axios.put(`/api/orders/1/addDragon`, {id: dragonId})
-    .then(res => res.data)
-    .then(newCart => {
-      const action = create(newCart)
-      dispatch(action);
-    })
+export const addCartDragon = (dragonId, userId) => dispatch => {
+  return axios.put(`api/users/${userId}/cart`)
 }
 
 export const updateCartOrder = (info, orderId) => dispatch => {
@@ -71,8 +70,8 @@ export const updateCartOrder = (info, orderId) => dispatch => {
     .then(updatedInfo => {
       const updateAction = updateCartOrder(updatedInfo)
       dispatch(updateAction)
-
     })
+
 }
 
 export const deleteCartOrder = (orderId) => dispatch => {
