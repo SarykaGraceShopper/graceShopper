@@ -19,7 +19,9 @@ class SingleDragon extends Component {
 
   handleAddToCart(evt) {
     const dragonId = this.props.match.params.dragonId
+    console.log('single dragon comp dragon id', dragonId)
     const userId = this.props.user.id
+    console.log('single drag comp user id', userId)
     const addCartOrderDispatch = addCartDragon(dragonId, userId)
     store.dispatch(addCartOrderDispatch)
   }
