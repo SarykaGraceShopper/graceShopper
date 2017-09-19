@@ -68,7 +68,7 @@ export const addCartDragon = (dragonId, userId) => dispatch => {
   return axios.get(`/api/users/${userId}/cart`)
   .then(res => res.data ?
         res.data.id :
-        (axios.post(`/api/orders/post`, {cartId: userId})
+        (axios.post(`/api/orders/`, {cartId: userId})
         .then(res=>res.data.id)))
         .then(orderId =>
           axios.put(`/api/orders/${orderId}/addDragon`, {dragonId: dragonId}))
