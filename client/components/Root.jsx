@@ -17,6 +17,7 @@ import SingleDragon from './SingleDragon.jsx';
 import UpdateUser from './UpdateUser.jsx'
 import SingleUser from './SingleUser.jsx';
 import Cart from './Cart.jsx'
+import MissionStatement from './MissionStatement.jsx'
 
 
 class Root extends Component {
@@ -42,6 +43,7 @@ class Root extends Component {
             <Route exact path="/profile" component={UpdateUser} />
             <Route exact path="/user/:userId" component={SingleUser} />
             <Route exact path="/cart/:userId" component={Cart} />
+            <Route exact path="/missionStatement" component={MissionStatement}/>
             <Redirect to="/" />
           </Switch>
       </div>
