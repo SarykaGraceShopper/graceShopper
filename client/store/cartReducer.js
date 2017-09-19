@@ -57,10 +57,19 @@ export default function reducer (cart = [], action) {
 export const fetchCartOrders = (userId) => dispatch => {
 
   return axios.get(`/api/users/${userId}/cart`)
-    .then(res => {
-      cartID = res.data.id;
+    .then( res =>
+      res.data ?
+      res.data
+      :
+      (axios.post(`/api/orders`, {cartId: userId})
+      .then(res => res.data ))
+      )
+      .then( res =>
+      res.data ?
       dispatch(init(res.data.dragons))
-      })
+      :
+      dispatch(createCart())
+      )
     .catch(err => console.error('Fetching cart orders unsuccessful', err));
 }
 
