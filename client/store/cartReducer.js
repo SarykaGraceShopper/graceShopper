@@ -82,6 +82,24 @@ export const addCartDragon = (dragonId, userId) => dispatch => {
       }
 
 
+export const checkoutCartOrder = (orderId, cart, userId, history) => dispatch => {
+  //change current db cart's cartId to null, pastOrderId to userId
+  console.log("CHECKOUTSTUFF ", orderId, cart, userId, )
+  axios.put(`/api/orders/${orderId}`, {orderDate: "1/1/1"})
+    .then(res => {
+      //create new db cart for use
+      const newCart = {
+        cartId: userId
+      }
+      axios.post(`/api/orders`, newCart)
+        .then(res => {
+          //clear store state cart
+          dispatch(clearCart());
+          history.push(`/cart`)
+          res.json(data)
+        })
+    })
+}
 
 
 export const updateCartOrder = (info, orderId) => dispatch => {

@@ -17,7 +17,7 @@ router.get('/currentUser', (req, res, next) => {
 
 router.get('/:userId', (req, res, next) => {
   User.findOne({
-    where: {id: req.params.userId}
+    where: { id: req.params.userId }
   })
     .then(user => res.json(user))
     .catch(next);
@@ -25,7 +25,7 @@ router.get('/:userId', (req, res, next) => {
 
 router.get('/:userId/pastOrders', (req, res, next) => {
   Order.findAll({
-    where: {pastOrderId: req.params.userId}
+    where: { pastOrderId: req.params.userId }
   })
     .then(order => res.json(order))
     .catch(next);
@@ -33,7 +33,10 @@ router.get('/:userId/pastOrders', (req, res, next) => {
 
 router.get('/:userId/cart', (req, res, next) => {
   Order.findOne({
-    where: {cartId: req.params.userId}
+    where: {
+      cartId: req.params.userId,
+      orderId: null
+    }
   })
     .then(order => res.json(order))
     .catch(next);
@@ -41,7 +44,7 @@ router.get('/:userId/cart', (req, res, next) => {
 
 router.get('/:userId/reviews', (req, res, next) => {
   Review.findAll({
-    where: {userId: req.params.userId}
+    where: { userId: req.params.userId }
   })
     .then(order => res.json(order))
     .catch(next);
@@ -59,14 +62,14 @@ router.put('/:userId', (req, res, next) => {
       id: req.params.userId
     }
   })
-  .then(result => {
-    return User.findOne({
-      where: {
-        id: req.params.userId
-      }
+    .then(result => {
+      return User.findOne({
+        where: {
+          id: req.params.userId
+        }
+      })
     })
-  })
-  .then(user => res.json(user))
+    .then(user => res.json(user))
 })
 
 router.delete('/delete/:userId', (req, res, next) => {
@@ -75,15 +78,15 @@ router.delete('/delete/:userId', (req, res, next) => {
       id: req.params.userId
     }
   })
-  .then(result => {
-    return User.destroy({
-      where: {
-        id: req.params.userId
-      }
+    .then(result => {
+      return User.destroy({
+        where: {
+          id: req.params.userId
+        }
+      })
+        .then(u => res.send(result))
     })
-    .then(u => res.send(result))
-  })
-  .catch(next);
+    .catch(next);
 });
 
 
