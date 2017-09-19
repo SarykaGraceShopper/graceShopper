@@ -77,7 +77,7 @@ export const addCartDragon = (dragonId, userId) => dispatch => {
         )
         .then(res=> {
           dispatch(addDragon(res.data))
-          history.push(`/cart/${userId}`)
+          history.push(`/cart`)
         })
       }
 
