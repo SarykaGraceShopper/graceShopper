@@ -32,7 +32,7 @@ export default function reducer (cart = [], action) {
       return cart
 
     case ADD:
-      return [...cart, action.newDragon]
+      return [...cart, action.dragon]
 
     case UPDATE:
       const filtered = orders.filter(order => order.id !== action.order.id)
@@ -62,18 +62,21 @@ export const fetchCartOrders = (userId) => dispatch => {
 }
 
 export const addCartDragon = (dragonId, userId) => dispatch => {
+  console.log('in axios get user cart 1');
   return axios.get(`/api/users/${userId}/cart`)
   .then(res => {
     const orderId = res.data.id;
+    console.log('in put request to add dragon');
     return axios.put(`/api/orders/${orderId}/addDragon`, {dragonId: dragonId})
   })
-  .then(res =>
-    axios.get(`/api/dragons/${dragonId}`)
+  .then(res => {
+        console.log('in single dragon page to get dragon object');
+    return axios.get(`/api/dragons/${dragonId}`) }
   )
   .then(res=> {
-        dispatch(addDragon(res.data))
-  })
-  .then(res=> {
+    console.log('in add dragon dispatch command');
+    console.log(res.data)
+    dispatch(addDragon(res.data))
     history.push(`/cart/${userId}`)
   })
 }
