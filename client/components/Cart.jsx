@@ -1,15 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {withRouter} from 'react-router'
+import { withRouter } from 'react-router'
+import { checkoutCartOrder } from '../store/cartReducer'
 
 function Cart(props) {
-  const { cart } = props;
+  const { cart, handleCheckout } = props;
   return (
 
     <div>
-      {console.log(cart)}
       <h3>Dragons in Your Cart :)</h3>
+      <button onClick={handleCheckout()} type="checkout" className="btn btn-default">
+        Checkout
+        </button>
       <div className="row">
         {
           cart && cart.map(dragon => (
@@ -40,12 +43,13 @@ const mapStateToProps = function (state, ownProps) {
   };
 };
 
-// const mapDispatchToProps = function (dispatch, ownProps) {
-//   return {
-//     handleDelete(campusId) {
-//       dispatch(removeCampus(campusId, ownProps.history))
-//     }
-//   }
-// }
+const mapDispatchToProps = function (dispatch, ownProps) {
+  const userId = ownProps.match.params.userId;
+  return {
+    handleCheckout() {
+      dispatch(checkoutCartOrder(ownProps.cart.id, ownProps.cart, userId, ownProps.history))
+    }
+  }
+}
 
 export default withRouter(connect(mapStateToProps)(Cart));
