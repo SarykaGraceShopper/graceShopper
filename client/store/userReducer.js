@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {clearCart} from './cartReducer'
 
 //action types
 const GET_USER = 'GET_USER'
@@ -61,6 +62,7 @@ export const logout = () =>
     axios.post('api/auth/me/logout')
       .then(res => {
         dispatch(removeUser())
+        dispatch(clearCart())
         history.push('/login')
       })
       .catch(err => console.log(err))
