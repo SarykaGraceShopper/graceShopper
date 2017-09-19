@@ -56,8 +56,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   fetchInitialData: () => {
     dispatch(fetchDragons());
     dispatch(fetchOrders());
-    dispatch(fetchUser());
-  },
-});
+    dispatch(fetchUser()).then(res =>
+                               dispatch(fetchCartOrders(res.data.id)));
+}
+})
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Root));

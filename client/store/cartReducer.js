@@ -11,7 +11,7 @@ const DELETE = 'DELETE_CART_DRAGON'
 const ADD = 'ADD_NEW_CART_DRAGON'
 
 //action
-const init = cart => ({type: INITIALIZE, cart})
+const init = dragons => ({type: INITIALIZE, dragons})
 const create = newCart => ({type: CREATE})
 const update = dragon => ({type: UPDATE, dragon})
 const remove = dragon => ({type: DELETE, dragon})
@@ -26,7 +26,7 @@ export default function reducer (cart = [], action) {
   switch(action.type) {
 
     case INITIALIZE:
-      return action.cart;
+      return action.dragons;
 
     case CREATE:
       return cart
@@ -53,17 +53,15 @@ export const fetchCartOrders = (userId) => dispatch => {
   return axios.get(`/api/users/${userId}/cart`)
     .then(res => {
       cartID = res.data.id;
-      dispatch(init(res.data))
+      console.log(res)
+      dispatch(init(res.data.dragons))
+
     })
     .catch(err => console.error('Fetching cart orders unsuccessful', err));
 }
 
 export const addCartDragon = (dragonId, userId) => dispatch => {
-  return axios.get(`/api/users/${userId}/cart`)
-  .then(res => res.data ?
-        axios.put(`/api/orders/${res.data.id}/addDragon`, {id: dragonId}) :
-        axios.post(`/api/orders`, {cartId: +userId})
-        )
+  return axios.put(`api/users/${userId}/cart`)
 }
 
 export const updateCartOrder = (info, orderId) => dispatch => {
@@ -72,8 +70,8 @@ export const updateCartOrder = (info, orderId) => dispatch => {
     .then(updatedInfo => {
       const updateAction = updateCartOrder(updatedInfo)
       dispatch(updateAction)
-
     })
+
 }
 
 export const deleteCartOrder = (orderId) => dispatch => {
