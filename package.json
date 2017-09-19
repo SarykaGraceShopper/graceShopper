@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "start-dev": "webpack -w & nodemon server"
+    "start-dev": "webpack -w & nodemon server",
+    "deploy": "git checkout -b deploy && webpack -p && git add -f public/bundle.js public/bundle.js.map && git commit --allow-empty -m 'Deploying' && git push --force heroku deploy:master && git checkout master && git branch -D deploy"
   },
   "author": "",
   "license": "ISC",
