@@ -43,23 +43,29 @@ class SingleDragon extends Component {
             <div className="dragon-image" style={{backgroundImage: `url(${dragon.image})`}}>
             </div>
           </div>
-          <div className="col-sm-12 col-md-6 col-lg-6">
-            Name: {dragon.name}<br />
-            Color: {dragon.color}<br />
-            Breed: {dragon.breed}<br />
-            Badness: {dragon.badness}<br />
-            Powers: {(dragon.powers)
-                      ? dragon.powers.map((power, index) => (
-                        <span key={power.id}>{power.name}{(index !== dragon.powers.length - 1) && <span>, </span>}</span>
-                        ))
-                      : <span>none</span>
-                    }<br />
-            only ${dragon.price / 100}!
+          <div className="dragon-deets col-sm-12 col-md-6 col-lg-6">
+            <span className="label">name:</span>
+            <span className="description"> {dragon.name}</span><br />
+            <span className="label">color:</span>
+            <span className="description"> {dragon.color}</span><br />
+            <span className="label">breed:</span>
+            <span className="description"> {dragon.breed}</span><br />
+            <span className="label">badness:</span>
+            <span className="description"> {dragon.badness}</span><br />
+            <span className="label">powers:</span>
+            <span className="description">
+              {(dragon.powers)
+                ? dragon.powers.map(power => (power.name)).join(', ')
+                : 'none'
+              }</span><br />
+            <span className="price">only ${dragon.price / 100}!</span>
+            <div>
+              <button onClick={this.handleAddToCart} type="addDragonToCart" className="btn btn-primary">
+              Add Dragon to Cart
+              </button>
             </div>
+          </div>
         </div>
-        <button onClick={this.handleAddToCart} type="addDragonToCart" className="btn btn-default">
-        Add Dragon to Cart
-        </button>
       </div>
     );
   }

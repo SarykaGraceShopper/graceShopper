@@ -89,3 +89,25 @@ a {
   font-family: cursive;
   font-size: 1.5em;
 }
+
+.dragon-deets {
+  height: 100%;
+  vertical-align: middle;
+}
+
+.dragon-deets .label {
+  font-family: cursive;
+  font-size: .7em;
+  text-transform: lowercase;
+}
+
+.dragon-deets .description {
+  font-size: 2em;
+  text-transform: capitalize;
+}
+
+.dragon-deets .price {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-style: italic;
+}
