@@ -12,20 +12,20 @@ const ADD = 'ADD_NEW_CART_DRAGON'
 const CLEAR = 'CLEAR_CART_OF_DRAGONS'
 
 //action
-const init = dragons => ({type: INITIALIZE, dragons})
-const createCart = newCart => ({type: CREATE})
-const update = dragon => ({type: UPDATE, dragon})
-const remove = dragon => ({type: DELETE, dragon})
-const addDragon = dragon => ({type: ADD, dragon })
-export const clearCart = cart => ({type: CLEAR})
+const init = dragons => ({ type: INITIALIZE, dragons })
+const createCart = newCart => ({ type: CREATE })
+const update = dragon => ({ type: UPDATE, dragon })
+const remove = dragon => ({ type: DELETE, dragon })
+const addDragon = dragon => ({ type: ADD, dragon })
+export const clearCart = cart => ({ type: CLEAR })
 
 //cart id
 //todo: cleanup, find better way to get id
 let cartID = -1
 
 //reducers
-export default function reducer (cart = [], action) {
-  switch(action.type) {
+export default function reducer(cart = [], action) {
+  switch (action.type) {
 
     case INITIALIZE:
       return action.dragons;
@@ -57,48 +57,54 @@ export default function reducer (cart = [], action) {
 export const fetchCartOrders = (userId) => dispatch => {
 
   return axios.get(`/api/users/${userId}/cart`)
-    .then( res => res.data )
-      .then(res => {
-      dispatch(init(res.dragons)) }
-      )
+    .then(res => res.data)
+    .then(res => {
+      dispatch(init(res.dragons))
+    }
+    )
     .catch(err => console.error('Fetching cart orders unsuccessful', err));
 }
 
 export const addCartDragon = (dragonId, userId) => dispatch => {
   return axios.get(`/api/users/${userId}/cart`)
-  .then(res => res.data ?
-        res.data.id :
-        (axios.post(`/api/orders/`, {cartId: userId})
-        .then(res=>res.data.id)))
-        .then(orderId =>
-          axios.put(`/api/orders/${orderId}/addDragon`, {dragonId: dragonId}))
-        .then(res => {
-          return axios.get(`/api/dragons/${dragonId}`) }
-        )
-        .then(res=> {
-          dispatch(addDragon(res.data))
-          history.push(`/cart/${userId}`)
-        })
-      }
+    .then(res => res.data ?
+      res.data.id :
+      (axios.post(`/api/orders/`, { cartId: userId })
+        .then(res => res.data.id)))
+    .then(orderId =>
+      axios.put(`/api/orders/${orderId}/addDragon`, { dragonId: dragonId }))
+    .then(res => {
+      return axios.get(`/api/dragons/${dragonId}`)
+    }
+    )
+    .then(res => {
+      dispatch(addDragon(res.data))
+      history.push(`/cart/${userId}`)
+    })
+}
 
 
 export const checkoutCartOrder = (orderId, cart, userId, history) => dispatch => {
   //change current db cart's cartId to null, pastOrderId to userId
   console.log("CHECKOUTSTUFF ", orderId, cart, userId, )
-  axios.put(`/api/orders/${orderId}`, {orderDate: "1/1/1"})
+  axios.get(`/api/users/${userId}/cart`)
     .then(res => {
-      //create new db cart for use
-      const newCart = {
-        cartId: userId
-      }
-      axios.post(`/api/orders`, newCart)
+      axios.put(`/api/orders/${res.data.cartId}`, { orderDate: "1/1/1" })
         .then(res => {
-          //clear store state cart
-          dispatch(clearCart());
-          history.push(`/cart`)
-          res.json(data)
+          //create new db cart for use
+          const newCart = {
+            cartId: userId
+          }
+          axios.post(`/api/orders`, newCart)
+            .then(res => {
+              //clear store state cart
+              dispatch(clearCart());
+              history.push(`/cart`)
+              res.json(data)
+            })
         })
     })
+
 }
 
 
@@ -114,9 +120,9 @@ export const updateCartOrder = (info, orderId) => dispatch => {
 
 export const deleteCartOrder = (orderId) => dispatch => {
   axios.delete(`/api/orders/${orderId}`)
-  .then(res => (res.data))
-  .then(order => {
-    const deleteAction = deleteCartOrder(order)
-    dispatch(deleteAction)
-  })
+    .then(res => (res.data))
+    .then(order => {
+      const deleteAction = deleteCartOrder(order)
+      dispatch(deleteAction)
+    })
 }

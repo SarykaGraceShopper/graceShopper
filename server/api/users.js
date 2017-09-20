@@ -35,7 +35,7 @@ router.get('/:userId/cart', (req, res, next) => {
   Order.findOne({
     where: {
       cartId: req.params.userId,
-      orderId: null
+      orderDate: null
     }
   })
     .then(order => res.json(order))
