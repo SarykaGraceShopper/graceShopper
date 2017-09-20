@@ -25,7 +25,9 @@ router.get('/:powerId', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
   Power.create(req.body)
-    .then(power => res.status(201).json(power))
+    .then(power => {
+      res.status(201).json(power)
+    })
     .catch(next)
 })
 
