@@ -2,7 +2,6 @@ const db = require('./_db');
 const Sequelize = require('sequelize');
 const Dragon = require('./dragon');
 
-
 const Order = db.define('order', {
   orderDate: {
     type: Sequelize.DATE
@@ -10,11 +9,13 @@ const Order = db.define('order', {
   shipDate: {
     type: Sequelize.DATE
   }
-}, {
+}
+,{
   defaultScope: {
     include: [Dragon]
   }
-});
+}
+);
 
 // instance methods
 Order.prototype.getTotal = function () {
