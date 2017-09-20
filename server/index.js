@@ -5,7 +5,6 @@ const db = require('./db').db;
 if (process.env.NODE_ENV === 'development') {
   require('../localSecrets'); // this will mutate the process.env object with your secrets.
 }
-
 const app = require('./app');
 const port = process.env.PORT || 3000;
 
@@ -17,3 +16,5 @@ db.sync()  // sync our database
         }) // then start listening with our express server once we have synced
 
     })
+
+module.exports = app;
